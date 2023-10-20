@@ -1,12 +1,14 @@
 import ReactPlayer from "react-player";
 import { useState, useEffect } from "react";
+import ballPattern from "../assets/ball-pattern.svg";
+import dotPattern from "../assets/dot-pattern.svg";
 
 const Welcoming = () => {
   const [widthPlayer, setWidthPlayer] = useState(800);
 
   useEffect(() => {
     const handleResize = () => {
-      setWidthPlayer(window.innerWidth < 850 ? window.innerWidth-60 : 800);
+      setWidthPlayer(window.innerWidth < 850 ? window.innerWidth - 60 : 800);
     };
 
     handleResize();
@@ -19,9 +21,9 @@ const Welcoming = () => {
 
   return (
     <div className="pt-16">
-      <div className="cust-container flex justify-center py-16">
-        <div className="w-full sm:w-10/12 xl:w-7/12 flex flex-col gap-7 justify-center items-center">
-          <h1 className="text-2xl md:text-4xl lg:text-5xl text-center leading-snug font-bold">
+      <div className="cust-container relative flex justify-center py-16">
+        <div className="relative w-full sm:w-10/12 xl:w-7/12 flex flex-col gap-7 justify-center items-center">
+          <h1 className="text-2xl z-10 md:text-4xl lg:text-5xl text-center leading-snug font-bold">
             Temukan keindahan dan keberagaman budaya negara Indonesia
           </h1>
           <p className="text-justify text-base md:text-xl text-cust-gray-500">
@@ -45,7 +47,13 @@ const Welcoming = () => {
               height={widthPlayer / 1.8}
             />
           </div>
+          <div className="absolute top-0 left-8 w-20 h-20">
+            <img src={ballPattern} className="w-full" alt="MissingIMG" />
+          </div>
         </div>
+      </div>
+      <div className="absolute top-1/2 -translate-y-1/2 right-0 w-24 h-24">
+        <img src={dotPattern} className="w-full" alt="MissingIMG" />
       </div>
     </div>
   );

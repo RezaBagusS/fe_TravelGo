@@ -2,8 +2,8 @@ import TagHome from "./TagHome";
 
 const FotoWisata = () => {
   return (
-    <div className="cust-container py-10 flex flex-col gap-4">
-      <div className="w-fit mx-auto">
+    <div className="cust-container py-10 flex flex-col gap-4 ">
+      <div className="w-fit mx-auto text-cust-teal-500">
         <TagHome text="FOTO FOTO WISATA INDONESIA" />
       </div>
       <h2 className="text-black text-center text-2xl sm:text-3xl md:text-4xl font-bold">
