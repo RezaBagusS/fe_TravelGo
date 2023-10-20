@@ -3,15 +3,129 @@ import { Link } from "react-router-dom";
 
 const dataListNavbar = ["Beranda", "Virtual Tour", "Kontak", "Tentang"];
 
+const SideBarMenu = ({ openSidebar }) => {
+  return (
+    <div
+      className={`fixed w-full h-screen bg-white transition-all duration-300
+    ${openSidebar ? "translate-x-0" : "translate-x-full"}
+    `}
+    >
+      <div className="cust-container flex flex-col gap-5 py-5">
+        {dataListNavbar.map((data, index) => {
+          return (
+            <Link
+              to={"/"}
+              key={index}
+              className="relative group w-fit flex flex-col pb-1 overflow-hidden"
+            >
+              <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-base font-semibold transition-all duration-100">
+                {data}
+              </h1>
+              <span className="absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out"></span>
+            </Link>
+          );
+        })}
+        <div className="flex flex-col gap-5">
+          <button className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150">
+            Sign Up
+          </button>
+          <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-6 py-2 rounded-lg transition-all duration-150">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const NavbarMobile = ({ isScroll, setOpenSideBar, openSideBar }) => {
+  const openMenu = () => {
+    setOpenSideBar((prev) => !prev);
+  };
+
+  const OpenSideBarStyles = (position) => {
+    if (openSideBar) {
+      switch (position) {
+        case "top":
+          return "p-0.5 w-full rounded-sm transform transition-all duration-150 rotate-45 translate-y-full";
+        case "middle":
+          return "hidden";
+        case "bottom":
+          return "p-0.5 w-full rounded-sm transition-all duration-150 -rotate-45 -translate-y-full";
+        default:
+          return "";
+      }
+    } else {
+      switch (position) {
+        case "top":
+          return "p-0.5 w-full rounded-sm transform translate-y-0 transition-all duration-150";
+        case "middle":
+          return "p-0.5 w-full rounded-sm translate-x-0";
+        case "bottom":
+          return "p-0.5 w-full rounded-sm translate-y-0 transition-all duration-150";
+        default:
+          return "";
+      }
+    }
+  };
+
+  return (
+    <div
+      className={`w-fit rounded-md md:hidden cursor-pointer flex flex-row justify-between items-center text-black
+      ${!isScroll && "bg-cust-teal-500 hover:bg-cust-teal-500/70"}
+    `}
+    >
+      <div
+        onClick={() => openMenu()}
+        className={`px-2 bg-cust-pinkMuda rounded-md cursor-pointer
+          ${isScroll && "hover:bg-cust-teal-500/10"}
+          ${openSideBar ? "py-3" : "py-2"}
+        `}
+      >
+        <div className="flex flex-col w-6 justify-center items-center gap-y-1">
+          <span
+            className={
+              OpenSideBarStyles("top") +
+              `
+            ${isScroll ? "bg-cust-teal-500" : "bg-cust-teal-50"}
+          `
+            }
+          ></span>
+          <span
+            className={
+              OpenSideBarStyles("middle") +
+              `
+            ${isScroll ? "bg-cust-teal-500" : "bg-cust-teal-50"}
+          `
+            }
+          ></span>
+          <span
+            className={
+              OpenSideBarStyles("bottom") +
+              `
+            ${isScroll ? "bg-cust-teal-500" : "bg-cust-teal-50"}
+          `
+            }
+          ></span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Navbar = () => {
   const [styleScroll, setStyleScroll] = useState("bg-transparent");
+  const [isScroll, setIsScroll] = useState(false);
+  const [openSideBar, setOpenSideBar] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {
         setStyleScroll("bg-white drop-shadow-[0px_2px_3px_rgba(0,0,0,0.2)]");
+        setIsScroll(true);
       } else {
         setStyleScroll("bg-transparent");
+        setIsScroll(false);
       }
     });
 
@@ -29,23 +143,32 @@ const Navbar = () => {
       <div className="cust-outer-container">
         <div className="cust-container flex flex-row justify-between items-center">
           <Link to={"/"}>
-            <h2 className="text-[#14B8A6] cursor-pointer hover:scale-105 font-extrabold font-poppins transition-all duration-150">
+            <h2 className="text-[#14B8A6] py-5 md:py-0 cursor-pointer hover:scale-105 font-extrabold font-poppins transition-all duration-150">
               TravelGO
             </h2>
           </Link>
-          <div className="py-5 flex items-center">
+          <div className="py-5 hidden md:flex items-center">
             <ul className="flex flex-row justify-between">
               {dataListNavbar.map((data, index) => (
                 <li
                   key={index}
                   className="px-5 font-medium cursor-pointer hover:text-cust-teal-500 hover:font-semibold"
                 >
-                  {data}
+                  <Link
+                    to={"/"}
+                    key={index}
+                    className="relative group w-fit flex flex-col pb-1 overflow-hidden"
+                  >
+                    <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-base font-semibold transition-all duration-100">
+                      {data}
+                    </h1>
+                    <span className="absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out"></span>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="flex gap-5">
+          <div className="hidden md:flex gap-5">
             <button className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150">
               Sign Up
             </button>
@@ -53,8 +176,14 @@ const Navbar = () => {
               Login
             </button>
           </div>
+          <NavbarMobile
+            isScroll={isScroll}
+            openSideBar={openSideBar}
+            setOpenSideBar={setOpenSideBar}
+          />
         </div>
       </div>
+      <SideBarMenu openSidebar={openSideBar} />
     </nav>
   );
 };
