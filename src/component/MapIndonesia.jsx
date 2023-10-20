@@ -26,7 +26,7 @@ const MapIndonesia = () => {
       <h2 className="text-cust-gray-700 text-2xl sm:text-3xl font-bold">
         Peta Pariwisata Indonesia
       </h2>
-      <p className="font-medium text-sm sm:text-base text-center w-full sm:w-8/12">
+      <p className="font-medium text-cust-teal-500 text-sm sm:text-base text-center w-full sm:w-8/12">
         Virtual Tour membantu kamu agar mendapat pengalaman liburan di Indonesia
         dengan pengalaman menyenangkan dengan berbagai fitur yang kami tawarkan.
         Apa aja sih?
