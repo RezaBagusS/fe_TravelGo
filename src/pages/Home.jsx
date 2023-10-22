@@ -1,10 +1,10 @@
-import Welcoming from "../component/Welcoming";
-import KeindahanIndonesia from "../component/KeindahanIndonesia";
-import KeberagamanIndonesia from "../component/KeberagamanIndonesia";
-import KulinerIndonesia from "../component/KulinerIndonesia";
+import Welcoming from "../component/HomeComp/Welcoming";
+import KeindahanIndonesia from "../component/HomeComp/KeindahanIndonesia";
+import KeberagamanIndonesia from "../component/HomeComp/KeberagamanIndonesia";
+import KulinerIndonesia from "../component/HomeComp/KulinerIndonesia";
 import { useEffect } from "react";
-import FotoWisata from "../component/FotoWisata";
-import MapIndonesia from "../component/MapIndonesia";
+import FotoWisata from "../component/HomeComp/FotoWisata";
+import MapIndonesia from "../component/HomeComp/MapIndonesia";
 
 const Home = () => {
   useEffect(() => {

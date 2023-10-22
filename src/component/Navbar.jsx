@@ -1,7 +1,28 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const dataListNavbar = ["Beranda", "Virtual Tour", "Kontak", "Tentang"];
+const dataListNavbar = [
+  {
+    name: "Beranda",
+    link: "/",
+  },
+  {
+    name: "Virtual Tour",
+    link: "/user/virtual-tour",
+  },
+  {
+    name: "Wisata",
+    link: "/user/wisata",
+  },
+  {
+    name: "Kontak",
+    link: "/kontak",
+  },
+  {
+    name: "Tentang",
+    link: "/tentang",
+  },
+];
 
 const SideBarMenu = ({ openSidebar }) => {
   return (
@@ -14,12 +35,12 @@ const SideBarMenu = ({ openSidebar }) => {
         {dataListNavbar.map((data, index) => {
           return (
             <Link
-              to={"/"}
+              to={data.link}
               key={index}
               className="relative group w-fit flex flex-col pb-1 overflow-hidden"
             >
               <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-base font-semibold transition-all duration-100">
-                {data}
+                {data.name}
               </h1>
               <span className="absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out"></span>
             </Link>
@@ -155,12 +176,12 @@ const Navbar = () => {
                   className="px-5 font-medium cursor-pointer hover:text-cust-teal-500 hover:font-semibold"
                 >
                   <Link
-                    to={"/"}
+                    to={data.link}
                     key={index}
                     className="relative group w-fit flex flex-col pb-1 overflow-hidden"
                   >
                     <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-base font-semibold transition-all duration-100">
-                      {data}
+                      {data.name}
                     </h1>
                     <span className="absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out"></span>
                   </Link>

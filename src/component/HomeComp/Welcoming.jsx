@@ -1,7 +1,7 @@
 import ReactPlayer from "react-player";
 import { useState, useEffect } from "react";
-import ballPattern from "../assets/ball-pattern.svg";
-import dotPattern from "../assets/dot-pattern.svg";
+import ballPattern from "../../assets/ball-pattern.svg";
+import dotPattern from "../../assets/dot-pattern.svg";
 
 const Welcoming = () => {
   const [widthPlayer, setWidthPlayer] = useState(800);
@@ -26,7 +26,7 @@ const Welcoming = () => {
           <h1 className="text-2xl z-10 md:text-4xl lg:text-5xl text-center leading-snug font-bold">
             Temukan keindahan dan keberagaman budaya negara Indonesia
           </h1>
-          <p className="text-justify text-base md:text-xl text-cust-gray-500">
+          <p className="text-justify md:text-center text-base md:text-xl text-cust-gray-500">
             TravelGO membantu kamu untuk memilih tempat wisata di Indonesia yang
             kaya akan budaya dan keberagaman serta petualangan yang menunggumu
             di Indonesia

@@ -2,6 +2,7 @@ import Home from "./pages/Home";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import VirtualTour from "./pages/VirtualTour";
 
 function App() {
   return (
@@ -10,6 +11,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/user/virtual-tour" element={<VirtualTour />} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
         <Footer/>
       </Router>

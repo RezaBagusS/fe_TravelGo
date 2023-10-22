@@ -8,13 +8,30 @@ import phone from "../assets/phone.svg";
 import location from "../assets/location.svg";
 
 const dataMedsos = [facebook, twitter, instagram, youtube];
+
 const dataMenu = [
-  "Beranda",
-  "Eksplorasi",
-  "Wisata Daerah",
-  "Mitra Pariwisata",
-  "Kontak",
+  {
+    name: "Beranda",
+    link: "/",
+  },
+  {
+    name: "Virtual Tour",
+    link: "/user/virtual-tour",
+  },
+  {
+    name: "Wisata",
+    link: "/user/wisata",
+  },
+  {
+    name: "Kontak",
+    link: "/kontak",
+  },
+  {
+    name: "Tentang",
+    link: "/tentang",
+  },
 ];
+
 const dataKontak = [
   {
     id: 1,
@@ -42,7 +59,7 @@ const Footer = () => {
             <h2 className="text-[#14B8A6] cursor-pointer text-sm font-extrabold font-poppins transition-all duration-150">
               TravelGO
             </h2>
-          </Link> 
+          </Link>
           <p className="text-xs w-7/12 text-cust-teal-500">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam,
             quis quae et quos iste voluptatum in quam nostrum quod laboriosam!
@@ -68,17 +85,25 @@ const Footer = () => {
               <h2 className="text-sm text-[#14B8A6] font-bold">Menu</h2>
               {dataMenu.map((item, index) => {
                 return (
-                  <Link to={"/"} key={index}>
-                    <p className="font-light text-xs text-cust-teal-500">{item}</p>
+                  <Link to={item.link} key={index}>
+                    <p className="font-light text-xs text-cust-teal-500">
+                      {item.name}
+                    </p>
                   </Link>
                 );
               })}
             </div>
             <div className="flex flex-col gap-3">
-              <h2 className="text-sm  text-[#14B8A6] font-bold">Hubungi Kami</h2>
+              <h2 className="text-sm  text-[#14B8A6] font-bold">
+                Hubungi Kami
+              </h2>
               {dataKontak.map((item) => {
                 return (
-                  <Link to={"/"} key={item.id} className="flex flex-row items-center gap-2 font medium text-xs text-cust-teal-500">
+                  <Link
+                    to={"/"}
+                    key={item.id}
+                    className="flex flex-row items-center gap-2 font medium text-xs text-cust-teal-500"
+                  >
                     <img src={item.icon} alt="MissingIcon" />
                     <p className="whitespace-nowrap">{item.tittle}</p>
                   </Link>

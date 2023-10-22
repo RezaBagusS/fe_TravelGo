@@ -1,4 +1,4 @@
-import TagHome from "./TagHome";
+import TagHome from "../TagHome";
 import { useEffect, useState } from "react";
 
 const MapIndonesia = () => {
