@@ -11,8 +11,8 @@ const dataListNavbar = [
     link: "/user/virtual-tour",
   },
   {
-    name: "Wisata",
-    link: "/user/wisata",
+    name: "Eksplorasi",
+    link: "/user/eksplorasi",
   },
   {
     name: "Kontak",
