@@ -141,7 +141,7 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 20) {
         setStyleScroll("bg-white drop-shadow-[0px_2px_3px_rgba(0,0,0,0.2)]");
         setIsScroll(true);
       } else {

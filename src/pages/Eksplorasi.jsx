@@ -81,21 +81,20 @@ const Eksplorasi = () => {
   };
 
   const TableIMG = () => {
-
     const [isHover, setIsHover] = useState(false);
     const [idHover, setIdHover] = useState(null);
 
     const handleHover = () => {
-        setIsHover(prev => !prev);
-    }
+      setIsHover((prev) => !prev);
+    };
 
     const handleMouseEnter = (id) => {
-        setIdHover(id);
-    }
+      setIdHover(id);
+    };
 
     const handleMouseLeave = () => {
-        setIdHover(null);
-    }
+      setIdHover(null);
+    };
 
     return (
       <div className="grid grid-cols-12 gap-10 mt-10">
@@ -105,18 +104,39 @@ const Eksplorasi = () => {
               <div
                 key={data.id}
                 onMouseEnter={() => {
-                    handleHover();
-                    handleMouseEnter(data.id);
+                  handleHover();
+                  handleMouseEnter(data.id);
                 }}
                 onMouseLeave={() => {
-                    handleHover();
-                    handleMouseLeave();
+                  handleHover();
+                  handleMouseLeave();
                 }}
                 className="relative w-full cursor-pointer h-[600px] col-span-4 rounded-3xl overflow-hidden"
               >
-                <div className={`w-full h-full absolute bg-black/40 p-2 transition-all duration-500
-                    ${isHover && idHover == data.id ? 'translate-y-0' : '-translate-y-full'}
-                `}></div>
+                <div
+                  className={`w-full h-full absolute bg-black flex justify-center items-center p-2 transition-all duration-500
+                    ${
+                      isHover && idHover == data.id
+                        ? "opacity-40"
+                        : "opacity-0"
+                    }
+                `}
+                >
+                  <div className="w-20 h-20 flex justify-center flex-col">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 -960 960 960"
+                      className="w-full opacity-70"
+                    >
+                      <path
+                        d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
+                        fill="white"
+                      />
+                    </svg>
+                    <p className="text-lg font-bold text-center text-white/80">View</p>
+                  </div>
+                </div>
                 <img
                   src={data.img}
                   className="w-full  object-cover object-center"
