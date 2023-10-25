@@ -5,6 +5,7 @@ import KulinerIndonesia from "../component/HomeComp/KulinerIndonesia";
 import { useEffect } from "react";
 import FotoWisata from "../component/HomeComp/FotoWisata";
 import MapIndonesia from "../component/HomeComp/MapIndonesia";
+import FiturTravelGo from "../component/HomeComp/FiturTravelGo";
 
 const Home = () => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const Home = () => {
         <KeberagamanIndonesia />
         <KulinerIndonesia />
         <FotoWisata />
+        <FiturTravelGo />
         <MapIndonesia />
       </div>
     </>
