@@ -1,5 +1,6 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import TagHome from "../TagHome";
 
 const dataFitur = [
   {
@@ -24,34 +25,47 @@ const dataFitur = [
 
 const FiturTravelGo = () => {
   return (
-    <div className="cust-container">
-      <Splide >
-        {dataFitur.map((item, index) => {
-          return (
-            <SplideSlide>
-              <div className="w-fit h-[550px] grid grid-cols-2 justify-center py-5">
-                <div className="flex flex-col gap-4 items-end justify-center">
-                  <div className="flex flex-col w-9/12 gap-5 items-start">
-                    <h2 className="text-5xl font-bold text-cust-teal-500">
-                      {item.title}
-                    </h2>
-                    <p className="text-lg text-cust-teal-500 font-medium">
-                      {item.desc}
-                    </p>
+    <div className="cust-container py-10">
+      <div className="w-fit mx-auto text-cust-teal-500">
+        <TagHome text="FITUR FITUR VIRTUAL TOUR" />
+      </div>
+      <h2 className="text-black text-center text-2xl sm:text-3xl md:text-4xl font-bold">
+        Apa aja sih yang bisa kalian lakuin di Virtual Tour?
+      </h2>
+      <p className="font-medium text-cust-teal-500 text-base text-center mx-auto w-full sm:w-8/12">
+        Virtual Tour membantu kamu agar mendapat pengalaman liburan di Indonesia
+        dengan pengalaman menyenangkan dengan berbagai fitur yang kami tawarkan.
+        Apa aja sih?
+      </p>
+      <div className="w-full overflow-hidden">
+        <Splide>
+          {dataFitur.map((item, index) => {
+            return (
+              <SplideSlide key={index}>
+                <div className="w-fit h-[550px] grid grid-cols-2 justify-center py-5">
+                  <div className="flex flex-col gap-4 items-end justify-center">
+                    <div className="flex flex-col w-9/12 gap-5 items-start">
+                      <h2 className="text-5xl font-bold text-cust-teal-500">
+                        {item.title}
+                      </h2>
+                      <p className="text-lg text-cust-teal-500 font-medium">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img
+                      src={item.img}
+                      className="w-9/12 h-fit"
+                      alt="MissingIMG"
+                    />
                   </div>
                 </div>
-                <div className="flex justify-center items-center">
-                  <img
-                    src={item.img}
-                    className="w-9/12 h-fit"
-                    alt="MissingIMG"
-                  />
-                </div>
-              </div>
-            </SplideSlide>
-          );
-        })}
-      </Splide>
+              </SplideSlide>
+            );
+          })}
+        </Splide>
+      </div>
     </div>
   );
 };
