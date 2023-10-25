@@ -6,8 +6,10 @@ import VirtualTour from "./pages/VirtualTour";
 import Kontak from "./pages/Kontak";
 import Tentang from "./pages/Tentang";
 import Eksplorasi from "./pages/Eksplorasi";
+import DinamicVirtualTour from "./pages/DinamicVirtualTour";
 
 function App() {
+
   return (
     <>
       <Router>
@@ -15,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/user/virtual-tour" element={<VirtualTour />} />
+          <Route path="/user/virtual-tour/:wisataTitle" element={<DinamicVirtualTour />} />
           <Route path="/kontak" element={<Kontak />} />
           <Route path="/tentang" element={<Tentang />} />
           <Route path="/user/eksplorasi" element={<Eksplorasi />} />

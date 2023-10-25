@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CardWisata = ({ data }) => {
   return (
     <div className="w-full grid grid-cols-3 gap-5">
@@ -16,9 +18,12 @@ const CardWisata = ({ data }) => {
             : data.desc}
         </p>
 
-        <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-xs sm:text-sm font-semibold px-6 py-2 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150">
+        <Link
+          to={`/user/virtual-tour/${data.dinamicTitle}`}
+          className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-xs sm:text-sm font-semibold px-6 py-2 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150"
+        >
           Selengkapnya
-        </button>
+        </Link>
       </div>
     </div>
   );

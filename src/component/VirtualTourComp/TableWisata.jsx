@@ -8,24 +8,28 @@ const dataWisata = [
   {
     id: 1,
     title: "Pantai Kuta",
+    dinamicTitle: "pantai-kuta",
     desc: "Pantai Kuta adalah sebuah pantai yang terletak di Kecamatan Kuta, Kabupaten Badung, Bali, Indonesia.",
     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
   },
   {
     id: 2,
     title: "Candi Borobudur",
+    dinamicTitle: "candi-borobudur",
     desc: "Candi Borobudur adalah sebuah candi Buddha yang terletak di Borobudur, Magelang, Jawa Tengah, Indonesia. Lokasi candi ini secara administratif terletak di wilayah Kecamatan Borobudur, Kabupaten Magelang, Provinsi Jawa Tengah, 40 kilometer di sebelah barat laut Yogyakarta, dan 86 kilometer di sebelah barat daya Surakarta.",
     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
   },
   {
     id: 3,
     title: "Raja Ampat",
+    dinamicTitle: "raja-ampat",
     desc: "Raja Ampat adalah gugusan kepulauan di Provinsi Papua Barat, Indonesia. Kepulauan ini terletak di bagian barat laut Kepala Burung Pulau Papua. Raja Ampat terdiri dari 1.500 pulau kecil yang tercakup dalam empat kabupaten, yaitu Kepulauan Raja Ampat, Kabupaten Sorong, Kabupaten Raja Ampat, dan Kabupaten Teluk Bintuni.",
     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
   },
   {
     id: 4,
     title: "Pantai Losari",
+    dinamicTitle: "pantai-losari",
     desc: "Pantai Losari adalah sebuah pantai yang terletak di Kelurahan Losari, Kecamatan Ujung Pandang, Kota Makassar, Sulawesi Selatan, Indonesia. Pantai ini terletak tidak jauh dari pusat Kota Makassar, tepatnya di sebelah barat daya Pelabuhan Soekarno-Hatta.",
     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
   },
