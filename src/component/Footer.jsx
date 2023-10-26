@@ -52,15 +52,15 @@ const dataKontak = [
 
 const Footer = () => {
   return (
-    <footer className="cust-outer-container py-10 ">
-      <div className="cust-container grid grid-cols-2">
-        <div className="flex flex-col gap-2">
+    <footer className="cust-outer-container py-10">
+      <div className="cust-container grid grid-cols-1 gap-5 md:gap-0 md:grid-cols-2">
+        <div className="flex flex-col items-center md:items-start gap-2">
           <Link to={"/"}>
             <h2 className="text-[#14B8A6] cursor-pointer text-sm font-extrabold font-poppins transition-all duration-150">
               TravelGO
             </h2>
           </Link>
-          <p className="text-xs w-7/12 text-cust-teal-500">
+          <p className="text-xs text-center md:text-start w-10/12 sm:w-7/12 text-cust-teal-500">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam,
             quis quae et quos iste voluptatum in quam nostrum quod laboriosam!
           </p>
@@ -80,8 +80,8 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex justify-center">
-          <div className="grid grid-cols-2">
-            <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-1 gap-5 md:gap-0 md:grid-cols-2">
+            <div className="flex flex-col items-center md:items-start gap-3">
               <h2 className="text-sm text-[#14B8A6] font-bold">Menu</h2>
               {dataMenu.map((item, index) => {
                 return (
@@ -93,22 +93,24 @@ const Footer = () => {
                 );
               })}
             </div>
-            <div className="flex flex-col gap-3">
-              <h2 className="text-sm  text-[#14B8A6] font-bold">
-                Hubungi Kami
-              </h2>
-              {dataKontak.map((item) => {
-                return (
-                  <Link
-                    to={"/"}
-                    key={item.id}
-                    className="flex flex-row items-center gap-2 font medium text-xs text-cust-teal-500"
-                  >
-                    <img src={item.icon} alt="MissingIcon" />
-                    <p className="whitespace-nowrap">{item.tittle}</p>
-                  </Link>
-                );
-              })}
+            <div className="flex justify-center">
+              <div className="flex flex-col items-start gap-3">
+                <h2 className="text-sm text-center w-full text-[#14B8A6] font-bold">
+                  Hubungi Kami
+                </h2>
+                {dataKontak.map((item) => {
+                  return (
+                    <Link
+                      to={"/"}
+                      key={item.id}
+                      className="flex flex-row items-center gap-2 font medium text-xs text-cust-teal-500"
+                    >
+                      <img src={item.icon} alt="MissingIcon" />
+                      <p className="whitespace-nowrap">{item.tittle}</p>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

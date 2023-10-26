@@ -19,7 +19,7 @@ const MapIndonesia = () => {
   }, []);
 
   return (
-    <div className="cust-container flex flex-col gap-2 items-center justify-center py-10">
+    <div className="cust-container flex flex-col gap-2 items-center justify-center pb-10">
       <div className="w-fit text-cust-teal-500">
         <TagHome text="PETA PARIWISATA INDONESIA" />
       </div>

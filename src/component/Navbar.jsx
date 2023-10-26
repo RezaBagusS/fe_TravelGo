@@ -187,14 +187,14 @@ const Navbar = () => {
               {dataListNavbar.map((data, index) => (
                 <li
                   key={index}
-                  className="px-5 font-medium cursor-pointer hover:text-cust-teal-500 hover:font-semibold"
+                  className="px-3 xl:px-5 font-medium cursor-pointer hover:text-cust-teal-500 hover:font-semibold"
                 >
                   <Link
                     to={data.link}
                     key={index}
                     className="relative group w-fit flex flex-col pb-1 overflow-hidden"
                   >
-                    <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-base font-semibold transition-all duration-100">
+                    <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-sm lg:text-base whitespace-nowrap font-semibold transition-all duration-100">
                       {data.name}
                     </h1>
                     <span className="absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out"></span>
@@ -206,13 +206,13 @@ const Navbar = () => {
           <div className="hidden md:flex gap-5">
             <Link
               to={"/auth/register"}
-              className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150"
+              className="border-2 border-cust-teal-500 whitespace-nowrap hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-2.5 lg:px-4 py-1 lg:py-2 rounded-lg transition-all duration-150"
             >
               Sign Up
             </Link>
             <Link
               to={"/auth/login"}
-              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-6 py-2 rounded-lg transition-all duration-150"
+              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150"
             >
               Login
             </Link>
