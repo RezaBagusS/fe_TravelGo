@@ -11,8 +11,8 @@ const CardWisata = ({ data }) => {
         />
       </div>
       <div className="col-span-2 flex flex-col gap-3 justify-center items-start">
-        <h3 className="font-bold text-3xl">{data.title}</h3>
-        <p className="font-semibold text-justify w-97% text-sm leading-snug text-cust-gray-500">
+        <h3 className="font-bold text-xl md:text-3xl">{data.title}</h3>
+        <p className="font-semibold text-justify text-xs sm:text-sm leading-snug text-cust-gray-500">
           {data.desc.length > 170
             ? `${data.desc.substring(0, 170)}...`
             : data.desc}

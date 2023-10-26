@@ -4,7 +4,7 @@ import dotPattern from "../../assets/dot-pattern.svg";
 const HeaderTittle = () => {
   return (
     <>
-      <div className="cust-container flex justify-center pt-32 pb-10">
+      <div className="cust-container flex justify-center pt-24 md:pt-32 pb-10">
         <div className="relative w-full sm:w-10/12 md:w-9/12 flex flex-col gap-7 justify-center items-center">
           <h1 className="text-2xl z-10 md:text-4xl lg:text-5xl text-center leading-snug font-bold">
             Jelajahi Keindahan Indonesia dengan Virtual Tour
@@ -14,12 +14,12 @@ const HeaderTittle = () => {
             Virtual Tour dari TravelGO yang membantu anda untuk menjelajahi
             Indonesia secara online.
           </p>
-          <div className="absolute bottom-20 right-10 w-20 h-20">
+          <div className="hidden md:absolute bottom-20 right-10 w-20 h-20">
             <img src={ballPattern} className="w-full" alt="MissingIMG" />
           </div>
         </div>
       </div>
-      <div className="absolute top-1/2 -translate-y-1/2 right-0 w-24 h-24">
+      <div className="hidden md:absolute top-1/2 -translate-y-1/2 right-0 w-24 h-24">
         <img src={dotPattern} className="w-full" alt="MissingIMG" />
       </div>
     </>

@@ -38,7 +38,7 @@ const dataWisata = [
 const SearchBar = ({ handleSearch }) => {
   return (
     <div className="w-full flex justify-center">
-      <div className="w-1/3 relative rounded-md overflow-hidden">
+      <div className="w-5/6 md:w-1/3 relative rounded-md overflow-hidden">
         <input
           type="search"
           onChange={(e) => handleSearch(e)}
@@ -78,7 +78,7 @@ const TableWisata = () => {
   return (
     <div className="cust-container pt-5 pb-10">
       <SearchBar handleSearch={handleSearch} />
-      <div className="w-full flex justify-start pt-5 pb-3 border-b-2">
+      <div className="w-full flex justify-start pt-10 sm:pt-5 pb-3 border-b-2">
         <h2 className="text-cust-gray-500 text-xl">Data Wisata :</h2>
       </div>
       <div className="w-full mt-5">
@@ -86,7 +86,7 @@ const TableWisata = () => {
             keyword === "" ? "REKOMENDASI WISATA" : `HASIL PENCARIAN : ${keyword}`
         } />
       </div>
-      <div className="py-3 grid grid-cols-2 gap-5">
+      <div className="py-3 grid grid-cols-1 md:grid-cols-2 gap-5">
         {filteredData.map((data) => {
           return <CardWisata data={data} key={data.id} />;
         })}

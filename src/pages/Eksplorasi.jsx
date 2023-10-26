@@ -67,13 +67,13 @@ const Eksplorasi = () => {
   const HeaderMenu = () => {
     return (
       <div className="grid grid-cols-12 gap-3">
-        <button className="col-span-2 border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-150">
+        <button className="col-span-6 md:col-span-2 border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-150">
           Eksplorasi
         </button>
-        <button className="col-span-2 border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-full transition-all duration-150">
+        <button className="col-span-6 md:col-span-2 border-2 whitespace-nowrap border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-3 py-2 rounded-full transition-all duration-150">
           Upload Foto
         </button>
-        <div className="col-span-8">
+        <div className="col-span-12 md:col-span-8">
           <SearchBar />
         </div>
       </div>
@@ -97,7 +97,7 @@ const Eksplorasi = () => {
     };
 
     return (
-      <div className="grid grid-cols-12 gap-10 mt-10">
+      <div className="grid grid-cols-12 gap-5 md:gap-10 mt-10">
         {dataWisata.map((data) => {
           return (
             data.id < 5 && (
@@ -111,7 +111,7 @@ const Eksplorasi = () => {
                   handleHover();
                   handleMouseLeave();
                 }}
-                className="relative w-full cursor-pointer h-[600px] col-span-4 rounded-3xl overflow-hidden"
+                className="relative w-full cursor-pointer h-fit col-span-6 sm:col-span-4 md:col-span-3 rounded-3xl overflow-hidden"
               >
                 <div
                   className={`w-full h-full absolute bg-black flex justify-center items-center p-2 transition-all duration-500
@@ -152,7 +152,7 @@ const Eksplorasi = () => {
 
   return (
     <div className="cust-outer-container text-black">
-      <div className="cust-container py-20">
+      <div className="cust-container pt-20">
         <HeaderMenu />
         <TableIMG />
       </div>

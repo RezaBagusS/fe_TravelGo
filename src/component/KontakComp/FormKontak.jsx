@@ -17,7 +17,7 @@ const FormKontak = () => {
           ></textarea>
         ) : (
           <input
-            className="text-cust-teal-500 text-base font-medium rounded-lg"
+            className="text-cust-teal-500 text-sm sm:text-base font-medium rounded-lg"
             placeholder={placeHolder}
             type={type}
             id={id}
@@ -29,7 +29,7 @@ const FormKontak = () => {
 
   return (
     <div className="relative cust-container flex justify-center py-5">
-      <form className="w-8/12 flex flex-col gap-5">
+      <form className="w-10/12 md:w-8/12 flex flex-col gap-5">
         <InputField
           placeHolder={"Isi nama lengkap kamu."}
           id="nama"
@@ -55,7 +55,7 @@ const FormKontak = () => {
           Kirim Pesan
         </button>
       </form>
-      <div className="absolute bottom-36 left-8 w-24 h-24">
+      <div className="hidden md:absolute bottom-36 left-8 w-24 h-24">
         <img src={ballPattern} className="w-full" alt="MissingIMG" />
       </div>
     </div>
