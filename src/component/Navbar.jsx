@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const dataListNavbar = [
   {
@@ -138,6 +138,9 @@ const Navbar = () => {
   const [styleScroll, setStyleScroll] = useState("bg-transparent");
   const [isScroll, setIsScroll] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
+  const [navbarDisplay, setNavbarDisplay] = useState(`fixed`);
+
+  const location = useLocation();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -157,7 +160,12 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed z-50 w-full text-base text-cust-gray-500
+      className={`${
+        location.pathname === "/auth/login" ||
+        location.pathname === "/auth/register"
+          ? "hidden"
+          : "fixed"
+      } z-50 w-full text-base text-cust-gray-500
     transition-all duration-150 ${styleScroll}
     `}
     >
