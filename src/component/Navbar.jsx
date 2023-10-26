@@ -24,7 +24,9 @@ const dataListNavbar = [
   },
 ];
 
-const SideBarMenu = ({ openSidebar }) => {
+const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
+  const location = useLocation();
+
   return (
     <div
       className={`fixed w-full h-screen bg-white transition-all duration-300
@@ -36,13 +38,22 @@ const SideBarMenu = ({ openSidebar }) => {
           return (
             <Link
               to={data.link}
+              onClick={() => setOpenSideBar(false)}
               key={index}
               className="relative group w-fit flex flex-col pb-1 overflow-hidden"
             >
               <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-base font-semibold transition-all duration-100">
                 {data.name}
               </h1>
-              <span className="absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out"></span>
+              <span
+                className={`absolute bottom-0 w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out
+                ${
+                  data.link == location.pathname
+                    ? "translate-x-0"
+                    : "group-hover:translate-x-0 -translate-x-full"
+                }
+              `}
+              ></span>
             </Link>
           );
         })}
@@ -144,7 +155,6 @@ const Navbar = () => {
   const [styleScroll, setStyleScroll] = useState("bg-transparent");
   const [isScroll, setIsScroll] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
-  const [navbarDisplay, setNavbarDisplay] = useState(`fixed`);
 
   const location = useLocation();
 
@@ -197,7 +207,15 @@ const Navbar = () => {
                     <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-sm lg:text-base whitespace-nowrap font-semibold transition-all duration-100">
                       {data.name}
                     </h1>
-                    <span className="absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out"></span>
+                    <span
+                      className={`absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out
+                      ${
+                        data.link == location.pathname
+                          ? "translate-x-0"
+                          : "group-hover:translate-x-0 -translate-x-full"
+                      }
+                    `}
+                    ></span>
                   </Link>
                 </li>
               ))}
@@ -224,7 +242,7 @@ const Navbar = () => {
           />
         </div>
       </div>
-      <SideBarMenu openSidebar={openSideBar} />
+      <SideBarMenu openSidebar={openSideBar} setOpenSideBar={setOpenSideBar} />
     </nav>
   );
 };
