@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 const Register = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="cust-outer-container bg-[url('https://res.cloudinary.com/dr0lbokc5/image/upload/v1698304423/Group_12_1_rpb6gz.png')] bg-cover bg-center">
       <div className="cust-container grid grid-cols-2 h-screen max-h-[700px] py-5">
@@ -39,8 +43,7 @@ const Register = () => {
                 to="/auth/login"
                 className="text-cust-gray-700 text-center hover:text-cust-teal-500/70 transition-all duration-150"
               >
-                Sudah punya akun?{" "}
-                <span className="font-bold">Masuk</span>
+                Sudah punya akun? <span className="font-bold">Masuk</span>
               </Link>
             </div>
           </div>

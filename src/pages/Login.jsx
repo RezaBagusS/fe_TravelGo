@@ -29,6 +29,10 @@ const Login = () => {
     gapi.load("client:auth2", start);
   });
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const responseLoginGoogle = async (response) => {
     let res = await loginGoogle(response);
 
@@ -57,7 +61,9 @@ const Login = () => {
           <div className="w-10/12 bg-white/60 p-7 rounded-2xl flex flex-col gap-3">
             <div className="flex justify-between">
               <h1 className="text-cust-gray-700 font-bold text-3xl">Masuk</h1>
-              <img src={logo} className="" alt="MissingIMG" />
+              <Link to={"/"}>
+                <img src={logo} className="cursor-pointer" alt="MissingIMG" />
+              </Link>
             </div>
             <div className="flex flex-col gap-4">
               <label>Nama Pengguna</label>
@@ -84,7 +90,9 @@ const Login = () => {
                 clientId={idClient}
                 render={(renderProps) => (
                   <button
-                    onClick={renderProps.onClick}
+                    onClick={() => {
+                      renderProps.onClick();
+                    }}
                     disabled={renderProps.disabled}
                     className="w-full flex gap-3 justify-center items-center bg-white hover:bg-white/70 text-cust-gray-700 text-base font-bold px-6 py-3 rounded-lg transition-all duration-150"
                   >
@@ -99,7 +107,6 @@ const Login = () => {
                 onSuccess={responseLoginGoogle}
                 onFailure={responseLoginGoogle}
                 cookiePolicy="single_host_origin"
-                isSignedIn={true}
               />
               <Link
                 to="/auth/register"
