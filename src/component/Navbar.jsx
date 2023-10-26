@@ -47,12 +47,18 @@ const SideBarMenu = ({ openSidebar }) => {
           );
         })}
         <div className="flex flex-col gap-5">
-          <button className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150">
+          <Link
+            to={"/auth/register"}
+            className="border-2 text-center border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150"
+          >
             Sign Up
-          </button>
-          <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-6 py-2 rounded-lg transition-all duration-150">
+          </Link>
+          <Link
+            to={"/auth/login"}
+            className="bg-cust-teal-500 text-center hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-6 py-2 rounded-lg transition-all duration-150"
+          >
             Login
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -198,12 +204,18 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="hidden md:flex gap-5">
-            <button className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150">
+            <Link
+              to={"/auth/register"}
+              className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150"
+            >
               Sign Up
-            </button>
-            <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-6 py-2 rounded-lg transition-all duration-150">
+            </Link>
+            <Link
+              to={"/auth/login"}
+              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-6 py-2 rounded-lg transition-all duration-150"
+            >
               Login
-            </button>
+            </Link>
           </div>
           <NavbarMobile
             isScroll={isScroll}

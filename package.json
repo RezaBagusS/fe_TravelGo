@@ -15,8 +15,10 @@
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",
     "framer-motion": "^10.16.4",
+    "gapi-script": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-login": "^5.2.2",
     "react-iframe": "^1.8.5",
     "react-player": "^2.13.0",
     "react-router-dom": "^6.16.0"
