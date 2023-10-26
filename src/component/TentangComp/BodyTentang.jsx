@@ -25,24 +25,24 @@ const BodyTentang = () => {
       <div className="cust-container">
         {dataTentang.map((item) => {
           return (
-            <div className="grid grid-cols-12">
-              <div className="col-span-5 w-full flex justify-center items-center">
+            <div key={item.id} className="grid grid-cols-12 gap-5 md:gap-0">
+              <div className="col-span-5 w-full hidden md:flex justify-center items-center">
                 <img
                   src={item.img}
                   className="w-8/12 object-center object-cover"
                   alt="MissingIMG"
                 />
               </div>
-              <div className={`col-span-2 mx-auto w-3 bg-[#14B8A6] flex justify-center items-start
+              <div className={`col-span-2 mx-auto w-2 md:w-3 bg-[#14B8A6] flex justify-center items-start
                 ${item.id == 3 && 'rounded-b-full'}
               `}>
-                <span className="py-2 px-3 rounded-full bg-white ring-8 text-cust-gray-500 font-bold text-lg ring-[#14B8A6]">
+                <span className="py-2 px-3 rounded-full bg-white ring-4 md:ring-8 text-cust-gray-500 font-bold text-lg ring-[#14B8A6]">
                   0{item.id}
                 </span>
               </div>
-              <div className="col-span-5 flex flex-col justify-center items-start gap-3">
-                <h2 className="text-6xl font-bold text-cust-gray-500">{item.title}</h2>
-                <p className="text-base text-justify font-semibold text-cust-teal-500">{item.desc}</p>
+              <div className="col-span-10 md:col-span-5 flex flex-col justify-center items-start gap-10 md:gap-3 py-3 md:py-0">
+                <h2 className="text-2xl sm:text-3xl md:text-6xl font-bold text-cust-gray-500">{item.title}</h2>
+                <p className="text-xs sm:text-sm md:text-base text-justify font-semibold text-cust-teal-500">{item.desc}</p>
               </div>
             </div>
           );
