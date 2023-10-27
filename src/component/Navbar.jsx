@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import propType from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { setDataLogin } from "../redux/slices/reduxDataLoginSlice";
 
 const dataListNavbar = [
   {
@@ -27,10 +29,20 @@ const dataListNavbar = [
 
 const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
   const location = useLocation();
+  const dataLogin = useSelector((state) => state.dataLogin.data);
+  const dispatch = useDispatch();
+
+  const handleImgProfile = () => {
+    if (dataLogin.img) {
+      return dataLogin.img;
+    } else {
+      return "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg";
+    }
+  };
 
   return (
     <div
-      className={`fixed w-full h-screen bg-white transition-all duration-300
+      className={`md:hidden fixed w-full h-screen bg-white transition-all duration-300
     ${openSidebar ? "translate-x-0" : "translate-x-full"}
     `}
     >
@@ -58,20 +70,61 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
             </Link>
           );
         })}
-        <div className="flex flex-col gap-5">
-          <Link
-            to={"/auth/register"}
-            className="border-2 text-center border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150"
-          >
-            Sign Up
-          </Link>
-          <Link
-            to={"/auth/login"}
-            className="bg-cust-teal-500 text-center hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-6 py-2 rounded-lg transition-all duration-150"
-          >
-            Login
-          </Link>
-        </div>
+        {dataLogin.userId != "0" ? (
+          <>
+            <div className="flex flex-col gap-4 justify-center items-center w-full md:hidden relative bg-slate-300 rounded-xl py-2 px-3">
+              <div className="flex justify-center items-center gap-2">
+                <img
+                  src={handleImgProfile()}
+                  className="w-16 h-16 rounded-full pointer-events-none"
+                  alt="MissingIMG"
+                />
+                <div className=" flex flex-col gap-1">
+                  <h1 className="text-sm font-semibold">{dataLogin.email}</h1>
+                  <p className="text-xs font-normal">{dataLogin.name}</p>
+                </div>
+              </div>
+              <Link
+                to={"/admin/kelola-wisata"}
+                onClick={() => setOpenSideBar(false)}
+                className="w-full bg-slate-100 py-2 text-center font-normal hover:font-semibold rounded-lg hover:bg-slate-200 transition-all duration-100"
+              >
+                Kelola Wisata
+              </Link>
+              <button
+                className="w-full bg-red-700 hover:bg-red-700/80 text-white py-2 text-center font-normal hover:font-semibold rounded-lg transition-all duration-100"
+                onClick={() => {
+                  dispatch(
+                    setDataLogin({
+                      email: "Email Not Found",
+                      message: "Message Not Found",
+                      img: "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
+                      userId: "0",
+                    })
+                  );
+                  setOpenSideBar(false);
+                }}
+              >
+                Log out
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="flex flex-col gap-5">
+            <Link
+              to={"/auth/register"}
+              className="border-2 border-cust-teal-500 whitespace-nowrap hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-base font-semibold px-4 py-3 text-center rounded-lg transition-all duration-150"
+            >
+              Sign Up
+            </Link>
+            <Link
+              to={"/auth/login"}
+              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-base font-semibold px-4 py-3 text-center rounded-lg transition-all duration-150"
+            >
+              Login
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -156,8 +209,11 @@ const Navbar = () => {
   const [styleScroll, setStyleScroll] = useState("bg-transparent");
   const [isScroll, setIsScroll] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   const location = useLocation();
+  const dispatch = useDispatch();
+  const dataLogin = useSelector((state) => state.dataLogin.data);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -174,6 +230,18 @@ const Navbar = () => {
       window.removeEventListener("scroll", () => {});
     };
   });
+
+  const handleDropdown = () => {
+    setOpenDropdown((prev) => !prev);
+  };
+
+  const handleImgProfile = () => {
+    if (dataLogin.img) {
+      return dataLogin.img;
+    } else {
+      return "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg";
+    }
+  };
 
   return (
     <nav
@@ -222,20 +290,68 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          <div className="hidden md:flex gap-5">
-            <Link
-              to={"/auth/register"}
-              className="border-2 border-cust-teal-500 whitespace-nowrap hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-2.5 lg:px-4 py-1 lg:py-2 rounded-lg transition-all duration-150"
-            >
-              Sign Up
-            </Link>
-            <Link
-              to={"/auth/login"}
-              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150"
-            >
-              Login
-            </Link>
-          </div>
+          {dataLogin.userId != "0" ? (
+            <>
+              <div className="hidden md:flex relative bg-slate-300 rounded-full p-1">
+                <img
+                  src={handleImgProfile()}
+                  onClick={() => handleDropdown()}
+                  className="w-10 h-10 rounded-full cursor-pointer"
+                  alt="MissingIMG"
+                />
+                {openDropdown && (
+                  <ul className="absolute right-0 text-sm top-full h-fit translate-y-2 rounded-md bg-cust-teal-50 overflow-hidden ring-2 ring-slate-300">
+                    <li className="bg-white text-cust-gray-700 text-end flex flex-col gap-1 border-b-2 px-3 py-2 whitespace-nowrap">
+                      <h1 className="text-sm font-semibold">
+                        {dataLogin.email}
+                      </h1>
+                      <p className="text-xs font-normal">{dataLogin.name}</p>
+                    </li>
+                    <li className="w-full cursor-pointer text-end px-3 py-2 hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150">
+                      <Link
+                        to={"/admin/kelola-wisata"}
+                        onClick={() => handleDropdown()}
+                      >
+                        Kelola Wisata
+                      </Link>
+                    </li>
+                    <li className="w-full cursor-pointer text-end px-3 py-2 hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150">
+                      <button
+                        onClick={() => {
+                          dispatch(
+                            setDataLogin({
+                              email: "Email Not Found",
+                              message: "Message Not Found",
+                              img: "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
+                              userId: "0",
+                            })
+                          );
+                          handleDropdown();
+                        }}
+                      >
+                        Log out
+                      </button>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="hidden md:flex gap-5">
+              <Link
+                to={"/auth/register"}
+                className="border-2 border-cust-teal-500 whitespace-nowrap hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm font-semibold px-2.5 lg:px-4 py-1 lg:py-2 rounded-lg transition-all duration-150"
+              >
+                Sign Up
+              </Link>
+              <Link
+                to={"/auth/login"}
+                className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150"
+              >
+                Login
+              </Link>
+            </div>
+          )}
           <NavbarMobile
             isScroll={isScroll}
             openSideBar={openSideBar}
@@ -243,7 +359,12 @@ const Navbar = () => {
           />
         </div>
       </div>
-      <SideBarMenu openSidebar={openSideBar} setOpenSideBar={setOpenSideBar} />
+      <SideBarMenu
+        openSidebar={openSideBar}
+        openDropdown={openDropdown}
+        setOpenSideBar={setOpenSideBar}
+        handleDropdown={handleDropdown}
+      />
     </nav>
   );
 };
@@ -253,6 +374,8 @@ export default Navbar;
 SideBarMenu.propTypes = {
   openSidebar: propType.bool.isRequired,
   setOpenSideBar: propType.func.isRequired,
+  openDropdown: propType.bool.isRequired,
+  handleDropdown: propType.func.isRequired,
 };
 
 NavbarMobile.propTypes = {
