@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import propType from "prop-types";
 
 const dataListNavbar = [
   {
@@ -248,3 +249,14 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+SideBarMenu.propTypes = {
+  openSidebar: propType.bool.isRequired,
+  setOpenSideBar: propType.func.isRequired,
+};
+
+NavbarMobile.propTypes = {
+  isScroll: propType.bool.isRequired,
+  openSideBar: propType.bool.isRequired,
+  setOpenSideBar: propType.func.isRequired,
+};

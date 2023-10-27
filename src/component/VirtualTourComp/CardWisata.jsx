@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import propType from "prop-types";
 
 const CardWisata = ({ data }) => {
   return (
@@ -30,3 +31,7 @@ const CardWisata = ({ data }) => {
 };
 
 export default CardWisata;
+
+CardWisata.propTypes = {
+  data: propType.object.isRequired,
+}

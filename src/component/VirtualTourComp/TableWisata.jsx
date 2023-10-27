@@ -1,8 +1,8 @@
-import React from "react";
 import search from "../../assets/search.svg";
 import TagHome from "../TagHome";
 import CardWisata from "./CardWisata";
 import { useState } from "react";
+import propType from "prop-types";
 
 const dataWisata = [
   {
@@ -96,3 +96,7 @@ const TableWisata = () => {
 };
 
 export default TableWisata;
+
+SearchBar.propTypes = {
+  handleSearch: propType.func.isRequired,
+}

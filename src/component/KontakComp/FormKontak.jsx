@@ -1,32 +1,33 @@
 import ballPattern from "../../assets/ball-pattern.svg";
+import propType from "prop-types";
+
+const InputField = ({ placeHolder, id, type, labelName }) => {
+  return (
+    <div className="flex flex-col gap-3">
+      <label className="text-cust-gray-500 text-lg font-semibold">
+        {labelName}
+      </label>
+      {id == "pesan" ? (
+        <textarea
+          className="text-cust-teal-500 text-base font-medium rounded-lg resize-y"
+          id={id}
+          placeholder={placeHolder}
+          cols="30"
+          rows="3"
+        ></textarea>
+      ) : (
+        <input
+          className="text-cust-teal-500 text-sm sm:text-base font-medium rounded-lg"
+          placeholder={placeHolder}
+          type={type}
+          id={id}
+        />
+      )}
+    </div>
+  );
+};
 
 const FormKontak = () => {
-  const InputField = ({ placeHolder, id, type, labelName }) => {
-    return (
-      <div className="flex flex-col gap-3">
-        <label className="text-cust-gray-500 text-lg font-semibold">
-          {labelName}
-        </label>
-        {id == "pesan" ? (
-          <textarea
-            className="text-cust-teal-500 text-base font-medium rounded-lg resize-y"
-            id={id}
-            placeholder={placeHolder}
-            cols="30"
-            rows="3"
-          ></textarea>
-        ) : (
-          <input
-            className="text-cust-teal-500 text-sm sm:text-base font-medium rounded-lg"
-            placeholder={placeHolder}
-            type={type}
-            id={id}
-          />
-        )}
-      </div>
-    );
-  };
-
   return (
     <div className="relative cust-container flex justify-center py-5">
       <form className="w-10/12 md:w-8/12 flex flex-col gap-5">
@@ -63,3 +64,10 @@ const FormKontak = () => {
 };
 
 export default FormKontak;
+
+InputField.propTypes = {
+  placeHolder: propType.string.isRequired,
+  id: propType.string.isRequired,
+  type: propType.string.isRequired,
+  labelName: propType.string.isRequired,
+};
