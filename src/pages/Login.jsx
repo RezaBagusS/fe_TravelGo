@@ -2,16 +2,21 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { loginGoogle } from "../Helpers/loginGoogle";
+import { loginApi } from "../Helpers/login";
 import googleIcon from "../assets/google-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { setDataLogin } from "../redux/slices/reduxDataLoginSlice";
 import { setLoading } from "../redux/slices/reduxLoadingSlice";
+import openEye from "../assets/openEye.svg";
+import closeEye from "../assets/closeEye.svg";
 
 const Login = () => {
+  const [eye, setEye] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const form = useRef();
   const objLoading = useSelector((state) => state.loading);
   const idClient = useSelector((state) => state.idClient.data);
 
@@ -44,7 +49,7 @@ const Login = () => {
         setDataLogin({
           email: res.email,
           message: res.message,
-          userId: res.userId,
+          id: res.userId,
           img: res.img,
           name: res.name,
         })
@@ -53,10 +58,40 @@ const Login = () => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    dispatch(setLoading(true));
+    let data = {
+      name: form.current[0].value,
+      password: form.current[1].value,
+    };
+    console.log("SEND DATA: ", data);
+    let res = await loginApi(data);
+
+    console.log("Response DATA : ", res);
+    if (res.status == "success") {
+      dispatch(
+        setDataLogin({
+          email: res.data.email,
+          name: res.data.name,
+          id: res.data.id,
+          img: res.data.img,
+          isAdmin: res.data.isAdmin,
+        })
+      );
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    }
+
+    e.target.reset();
+  };
+
   return (
     <div className="relative cust-outer-container bg-[url('https://res.cloudinary.com/dr0lbokc5/image/upload/v1698304423/Group_12_1_rpb6gz.png')] bg-cover bg-center">
       {objLoading.loading && (
-        <div className="fixed w-full h-screen bg-black/50 flex justify-center items-center">
+        <div className="fixed z-50 w-full h-screen bg-black/50 flex justify-center items-center">
           <div className="rounded-3xl py-32 px-40 bg-white/50 backdrop-blur-lg">
             <svg
               aria-hidden="true"
@@ -86,7 +121,11 @@ const Login = () => {
           />
         </div>
         <div className="p-2 sm:p-5 flex justify-center">
-          <div className="w-11/12 sm:10/12 md:w-8/12 lg:w-11/12 xl:w-10/12 bg-white/60 p-7 rounded-2xl flex flex-col gap-3">
+          <form
+            ref={form}
+            onSubmit={handleSubmit}
+            className="w-11/12 sm:10/12 md:w-8/12 lg:w-11/12 xl:w-10/12 bg-white/60 p-7 rounded-2xl flex flex-col gap-3"
+          >
             <div className="flex justify-center sm:justify-between">
               <h1 className="text-cust-gray-700 font-bold text-2xl sm:text-3xl">
                 Masuk
@@ -105,6 +144,9 @@ const Login = () => {
               </label>
               <input
                 type="text"
+                name="name"
+                required
+                autoComplete="off"
                 className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
                 placeholder="Nama Pengguna Kamu"
               />
@@ -113,11 +155,22 @@ const Login = () => {
               <label className="text-cust-gray-700 font-medium text-base sm:text-xl">
                 Kata Sandi
               </label>
-              <input
-                type="text"
-                className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
-                placeholder="Kata Sandi Kamu"
-              />
+              <div className="relative">
+                <input
+                  required
+                  autoComplete="off"
+                  type={eye ? "text" : "password"}
+                  name="password"
+                  className="w-full text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
+                  placeholder="Kata Sandi Kamu"
+                />
+                <img
+                  src={eye ? openEye : closeEye}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+                  onClick={() => setEye((prev) => !prev)}
+                  alt="icon"
+                />
+              </div>
             </div>
             <div className="flex justify-end">
               <Link
@@ -128,7 +181,10 @@ const Login = () => {
               </Link>
             </div>
             <div className="pt-5 flex flex-col gap-3">
-              <button className="w-full bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-base md:text-lg font-bold px-3 py-2 sm:px-6 sm:py-3 rounded-lg transition-all duration-150">
+              <button
+                type="submit"
+                className="w-full bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-base md:text-lg font-bold px-3 py-2 sm:px-6 sm:py-3 rounded-lg transition-all duration-150"
+              >
                 Login
               </button>
               <p className="text-center text-cust-gray-700 text-sm sm:text-base">
@@ -166,7 +222,7 @@ const Login = () => {
                 </Link>
               </p>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

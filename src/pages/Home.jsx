@@ -6,16 +6,17 @@ import { useEffect } from "react";
 import FotoWisata from "../component/HomeComp/FotoWisata";
 import MapIndonesia from "../component/HomeComp/MapIndonesia";
 import FiturTravelGo from "../component/HomeComp/FiturTravelGo";
-// import { useSelector, useDispatch } from "react-redux";
-// import { setLoading } from "../redux/slices/reduxLoadingSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoading } from "../redux/slices/reduxLoadingSlice";
 
 const Home = () => {
 
   // const dataLogin = useSelector((state) => state.dataLogin)
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(setLoading(false));
   }, []);
 
   return (

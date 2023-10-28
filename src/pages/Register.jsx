@@ -30,7 +30,6 @@ const Register = () => {
       if (res.status == "success") {
         navigate("/auth/login");
       }
-      dispatch(setLoading(false));
     }, 1000);
 
     e.target.reset();

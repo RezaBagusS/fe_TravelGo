@@ -70,7 +70,7 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
             </Link>
           );
         })}
-        {dataLogin.userId != "0" ? (
+        {dataLogin.id != "0" ? (
           <>
             <div className="flex flex-col gap-4 justify-center items-center w-full md:hidden relative bg-slate-300 rounded-xl py-2 px-3">
               <div className="flex justify-center items-center gap-2">
@@ -99,7 +99,7 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
                       email: "Email Not Found",
                       message: "Message Not Found",
                       img: "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
-                      userId: "0",
+                      id: "0",
                     })
                   );
                   setOpenSideBar(false);
@@ -231,6 +231,10 @@ const Navbar = () => {
     };
   });
 
+  useEffect(() => {
+    console.log("DATA LOGIN: ", dataLogin);
+  }, [dataLogin]);
+
   const handleDropdown = () => {
     setOpenDropdown((prev) => !prev);
   };
@@ -290,7 +294,7 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          {dataLogin.userId != "0" ? (
+          {dataLogin.id != "0" ? (
             <>
               <div className="hidden md:flex relative bg-slate-300 rounded-full p-1">
                 <img
@@ -315,20 +319,21 @@ const Navbar = () => {
                         Kelola Wisata
                       </Link>
                     </li>
-                    <li className="w-full cursor-pointer text-end px-3 py-2 hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150">
-                      <button
-                        onClick={() => {
-                          dispatch(
-                            setDataLogin({
-                              email: "Email Not Found",
-                              message: "Message Not Found",
-                              img: "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
-                              userId: "0",
-                            })
-                          );
-                          handleDropdown();
-                        }}
-                      >
+                    <li
+                      onClick={() => {
+                        dispatch(
+                          setDataLogin({
+                            email: "Email Not Found",
+                            message: "Message Not Found",
+                            img: "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
+                            id: "0",
+                          })
+                        );
+                        handleDropdown();
+                      }}
+                      className="w-full cursor-pointer text-end hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150"
+                    >
+                      <button className="w-full text-end px-3 py-2">
                         Log out
                       </button>
                     </li>
