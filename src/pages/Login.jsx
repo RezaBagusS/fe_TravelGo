@@ -62,14 +62,13 @@ const Login = () => {
       );
       navigate("/");
     } else {
+      dispatch(setLoading(false));
       dispatch(
         setMessage({
           status: res.status,
           content: res.message,
         })
       );
-      console.log("Loading", objLoading);
-      dispatch(setLoading(false));
     }
   };
 

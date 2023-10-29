@@ -4,8 +4,8 @@ const messageSlice = createSlice({
   name: "message",
   initialState: {
     message: {
-        status: "200",
-        content: "BERHASIL",
+        status: "",
+        content: "",
     }
   },
   reducers: {
