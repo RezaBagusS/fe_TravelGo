@@ -54,6 +54,7 @@ const Login = () => {
           id: res.userId,
           img: res.img,
           name: res.name,
+          isAdmin: res.isAdmin,
         }),
         setMessage({
           status: res.status,
@@ -112,7 +113,7 @@ const Login = () => {
     <div className="relative cust-outer-container bg-[url('https://res.cloudinary.com/dr0lbokc5/image/upload/v1698304423/Group_12_1_rpb6gz.png')] bg-cover bg-center">
       {objLoading && (
         <div className="fixed z-50 w-full h-screen bg-black/50 flex justify-center items-center">
-          <div className="rounded-3xl py-32 px-40 bg-white/50 backdrop-blur-lg">
+          <div className="rounded-3xl w-92 h-fit p-5 bg-white/50 backdrop-blur-lg">
             <svg
               aria-hidden="true"
               className="inline w-32 h-32 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -225,7 +226,7 @@ const Login = () => {
                       renderProps.onClick();
                     }}
                     disabled={renderProps.disabled}
-                    className="w-full flex gap-3 justify-center items-center bg-white hover:bg-white/70 text-cust-gray-700 text-xs md:text-base font-bold px-3 py-2 sm:px-6 sm:py-3 rounded-lg transition-all duration-150"
+                    className="w-full cursor-pointer flex gap-3 justify-center items-center bg-white hover:bg-white/70 text-cust-gray-700 text-xs md:text-base font-bold px-3 py-2 sm:px-6 sm:py-3 rounded-lg transition-all duration-150"
                   >
                     <img
                       src={googleIcon}

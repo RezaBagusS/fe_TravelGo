@@ -1,4 +1,5 @@
 const backendURL = "https://be-travel-go.vercel.app";
+// const backendURL = "http://localhost:3000";
 
 export const loginGoogle = async (response) => {
   console.log("Response : ", response.tokenId);
@@ -15,26 +16,30 @@ export const loginGoogle = async (response) => {
         }),
       });
 
+      console.log("Response : ", responseFromBackend);
       if (responseFromBackend.ok) {
         const data = await responseFromBackend.json();
-        // console.log("Response : ", data);
+        console.log("Response : ", data);
         return data;
       } else {
         // console.error("Respons tidak berhasil");
         return {
-          message: "Error - " + "Respons tidak berhasil",
+          status: "error",
+          message: "Respons tidak berhasil",
         };
       }
     } catch (error) {
       return {
-        message: "Error - " + "Server Error"
+        status: "error",
+        message: "Server Error"
       };
     }
   } else {
     // Pengguna membatalkan otentikasi atau terjadi kesalahan
     console.error("Otentikasi dibatalkan atau terjadi kesalahan");
     return {
-      message: "Error - " + "Otentikasi dibatalkan atau terjadi kesalahan",
+      status: "error",
+      message: "Otentikasi dibatalkan atau terjadi kesalahan",
     };
   }
 };

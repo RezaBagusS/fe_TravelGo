@@ -74,6 +74,9 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
           <>
             <div className="flex flex-col gap-4 justify-center items-center w-full md:hidden relative bg-slate-300 rounded-xl py-2 px-3">
               <div className="flex justify-center items-center gap-2">
+                <span className="px-3 h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
+                  {dataLogin.isAdmin ? "Admin" : "User"}
+                </span>
                 <img
                   src={handleImgProfile()}
                   className="w-16 h-16 rounded-full pointer-events-none"
@@ -295,8 +298,11 @@ const Navbar = () => {
             </ul>
           </div>
           {dataLogin.id != "0" ? (
-            <>
-              <div className="hidden md:flex relative bg-slate-300 rounded-full p-1">
+            <div className="hidden md:flex items-center gap-3">
+              <span className="px-3 h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
+                {dataLogin.isAdmin ? "Admin" : "User"}
+              </span>
+              <div className="flex relative bg-slate-300 rounded-full p-1">
                 <img
                   src={handleImgProfile()}
                   onClick={() => handleDropdown()}
@@ -340,7 +346,7 @@ const Navbar = () => {
                   </ul>
                 )}
               </div>
-            </>
+            </div>
           ) : (
             <div className="hidden md:flex gap-5">
               <Link
