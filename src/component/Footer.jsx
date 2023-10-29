@@ -60,9 +60,9 @@ const Footer = () => {
               TravelGO
             </h2>
           </Link>
-          <p className="text-xs text-center md:text-start w-10/12 sm:w-7/12 text-cust-teal-500">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam,
-            quis quae et quos iste voluptatum in quam nostrum quod laboriosam!
+          <p className="text-xs text-center md:text-start w-11/12 sm:w-9/12 text-cust-teal-500">
+            TravelGo dibuat dengan tujuan untuk mempromosikan kekayaan budaya
+            dan pariwisata yang dimiliki Indonesia dengan cara menawarkan Virtual Tour.
           </p>
           <div className="flex flex-row gap-1">
             {dataMedsos.map((item, index) => {

@@ -1,5 +1,5 @@
-// const backendURL = "https://be-travel-go.vercel.app";
-const backendURL = "http://localhost:3000";
+const backendURL = "https://be-travel-go.vercel.app";
+// const backendURL = "http://localhost:3000";
 
 export const loginApi = async (data) => {
   const response = await fetch(`${backendURL}/api/auth/login`, {
