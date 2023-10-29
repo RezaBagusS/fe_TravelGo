@@ -9,6 +9,7 @@ import googleIcon from "../assets/google-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { setDataLogin } from "../redux/slices/reduxDataLoginSlice";
 import { setLoading } from "../redux/slices/reduxLoadingSlice";
+import { setMessage } from "../redux/slices/reduxMessageSlice";
 import openEye from "../assets/openEye.svg";
 import closeEye from "../assets/closeEye.svg";
 
@@ -17,8 +18,9 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const form = useRef();
-  const objLoading = useSelector((state) => state.loading);
+  const objLoading = useSelector((state) => state.loading.loading);
   const idClient = useSelector((state) => state.idClient.data);
+  const { content, status } = useSelector((state) => state.message.message);
 
   useEffect(() => {
     const start = () => {
@@ -52,9 +54,22 @@ const Login = () => {
           id: res.userId,
           img: res.img,
           name: res.name,
+        }),
+        setMessage({
+          status: res.status,
+          content: res.message,
         })
       );
       navigate("/");
+    } else {
+      dispatch(
+        setMessage({
+          status: res.status,
+          content: res.message,
+        })
+      );
+      console.log("Loading", objLoading);
+      dispatch(setLoading(false));
     }
   };
 
@@ -80,17 +95,23 @@ const Login = () => {
           isAdmin: res.data.isAdmin,
         })
       );
+      e.target.reset();
       setTimeout(() => {
         navigate("/");
       }, 1000);
+    } else {
+      dispatch(setLoading(false));
+      let dataMessage = {
+        status: res.status,
+        content: res.message,
+      };
+      dispatch(setMessage(dataMessage));
     }
-
-    e.target.reset();
   };
 
   return (
     <div className="relative cust-outer-container bg-[url('https://res.cloudinary.com/dr0lbokc5/image/upload/v1698304423/Group_12_1_rpb6gz.png')] bg-cover bg-center">
-      {objLoading.loading && (
+      {objLoading && (
         <div className="fixed z-50 w-full h-screen bg-black/50 flex justify-center items-center">
           <div className="rounded-3xl py-32 px-40 bg-white/50 backdrop-blur-lg">
             <svg
@@ -138,6 +159,13 @@ const Login = () => {
                 />
               </Link>
             </div>
+            {status == "error" && (
+              <div className="bg-red-500 p-2 rounded-lg">
+                <p className="text-cust-teal-50 text-sm text-center">
+                  {content}
+                </p>
+              </div>
+            )}
             <div className="flex flex-col gap-2">
               <label className="text-cust-gray-700 font-medium text-base sm:text-xl">
                 Nama Pengguna
