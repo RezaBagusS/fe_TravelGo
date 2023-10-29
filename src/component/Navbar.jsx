@@ -253,8 +253,8 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        location.pathname === "/auth/login" ||
-        location.pathname === "/auth/register"
+        location.pathname.includes("/auth") ||
+        location.pathname.includes("/admin")
           ? "hidden"
           : "fixed"
       } z-50 w-full text-base text-cust-gray-500

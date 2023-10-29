@@ -19,6 +19,7 @@ export const loginGoogle = async (response) => {
       console.log("Response : ", responseFromBackend);
       if (responseFromBackend.ok) {
         const data = await responseFromBackend.json();
+        localStorage.setItem("token", data.token);
         console.log("Response : ", data);
         return data;
       } else {

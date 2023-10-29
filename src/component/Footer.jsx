@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import facebook from "../assets/facebook.svg";
 import instagram from "../assets/instagram.svg";
 import twitter from "../assets/twitter.svg";
@@ -51,8 +51,19 @@ const dataKontak = [
 ];
 
 const Footer = () => {
+
+  const location = useLocation();
+
   return (
-    <footer className="cust-outer-container py-10">
+    <footer
+      className={`cust-outer-container py-10
+    ${
+      location.pathname.includes("/admin")
+        ? "hidden"
+        : "flex"
+    }
+    `}
+    >
       <div className="cust-container grid grid-cols-1 gap-5 md:gap-0 md:grid-cols-2">
         <div className="flex flex-col items-center md:items-start gap-2">
           <Link to={"/"}>
@@ -62,7 +73,8 @@ const Footer = () => {
           </Link>
           <p className="text-xs text-center md:text-start w-11/12 sm:w-9/12 text-cust-teal-500">
             TravelGo dibuat dengan tujuan untuk mempromosikan kekayaan budaya
-            dan pariwisata yang dimiliki Indonesia dengan cara menawarkan Virtual Tour.
+            dan pariwisata yang dimiliki Indonesia dengan cara menawarkan
+            Virtual Tour.
           </p>
           <div className="flex flex-row gap-1">
             {dataMedsos.map((item, index) => {
