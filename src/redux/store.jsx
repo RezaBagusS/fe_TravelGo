@@ -3,6 +3,7 @@ import dataLoginReducer from "./slices/reduxDataLoginSlice";
 import loadingReducer from "./slices/reduxLoadingSlice";
 import idClientReducer from "./slices/reduxIdClientSlice";
 import messageReducer from "./slices/reduxMessageSlice";
+import dataWisataReducer from "./slices/reduxDataWisataSlice";
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         loading: loadingReducer,
         idClient: idClientReducer,
         message: messageReducer,
+        dataWisata: dataWisataReducer,
     },
 })
 

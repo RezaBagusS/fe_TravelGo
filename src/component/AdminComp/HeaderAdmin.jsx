@@ -29,7 +29,7 @@ const HeaderAdmin = () => {
         </h2>
       </div>
       <div className="col-span-2 flex justify-center items-center gap-3">
-        <h2 className="text-base text-cust-gray-700 font-semibold">{name}</h2>
+        <h2 className="text-base text-cust-gray-700 font-semibold text-end">{name}</h2>
         <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-cust-gray-500">
           <img src={img} alt="MissingIMG" />
         </div>
