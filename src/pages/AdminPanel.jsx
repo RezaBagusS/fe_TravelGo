@@ -38,7 +38,7 @@ const AdminPanel = () => {
         <div className="col-span-1"></div>
         <div className="col-span-11 px-5">
           <HeaderAdmin />
-          <div className="w-full px-5">{<HandlePath />}</div>
+          <div className="w-full px-5 pb-10">{<HandlePath />}</div>
         </div>
       </div>
     </div>
