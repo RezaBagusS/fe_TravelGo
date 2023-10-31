@@ -1,10 +1,11 @@
 
 # Travel Go
-<center><p style="text-align: center; padding-top: 30px; padding-bottom: 30px;">
+<p style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
   <a href="https://fe-travel-go.vercel.app/" target="_blank">
     <img src="https://res.cloudinary.com/dbapkghnt/image/upload/v1698714509/Group_8_tudujt.png" width="400" alt="MedEase Logo">
   </a>
-</p></center>
+</p>
+
 
 ## Link Website TravelGo
 
