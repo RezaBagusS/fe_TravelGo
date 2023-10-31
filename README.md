@@ -1,7 +1,11 @@
 
 # Travel Go
 
-<p align="center"><a href="https://fe-travel-go.vercel.app/" target="_blank"><img src="https://res.cloudinary.com/dbapkghnt/image/upload/v1698714509/Group_8_tudujt.png" width="400" alt="Logo"></a></p>
+<p align="center" style="padding-top: 30px; padding-bottom: 30px;">
+  <a href="https://fe-travel-go.vercel.app/" target="_blank">
+    <img src="https://res.cloudinary.com/dbapkghnt/image/upload/v1698714509/Group_8_tudujt.png" width="400" alt="Logo">
+  </a>
+</p>
 
 ## Link Website TravelGo
 
