@@ -16,33 +16,32 @@ import UpdateWisata from "./component/AdminComp/UpdateWisata";
 import AdminProfile from "./component/AdminComp/AdminProfile";
 
 function App() {
-
   return (
     <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/user/virtual-tour" element={<VirtualTour />} />
-          <Route
-            path="/user/virtual-tour/:wisataTitle"
-            element={<DinamicVirtualTour />}
-          />
-          <Route path="/kontak" element={<Kontak />} />
-          <Route path="/tentang" element={<Tentang />} />
-          <Route path="/user/eksplorasi" element={<Eksplorasi />} />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/register" element={<Register />} />
-          <Route path="/admin/*" element={<AdminPanel />} >
-            <Route path="kelola-wisata" element={<ListWisata />} />
-            <Route path="add-wisata" element={<AddWisata />} />
-            <Route path="update-wisata" element={<UpdateWisata />} />
-            <Route path="profile" element={<AdminProfile />} />
-          </Route>
-          <Route path="*" element={<h1>404 Not Found</h1>} />
-        </Routes>
-        <Footer />
-      </Router>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/user/virtual-tour" element={<VirtualTour />} />
+            <Route
+              path="/user/virtual-tour/:wisataTitle"
+              element={<DinamicVirtualTour />}
+            />
+            <Route path="/kontak" element={<Kontak />} />
+            <Route path="/tentang" element={<Tentang />} />
+            <Route path="/user/eksplorasi" element={<Eksplorasi />} />
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/register" element={<Register />} />
+            <Route path="/admin/*" element={<AdminPanel />}>
+              <Route path="kelola-wisata" element={<ListWisata />} />
+              <Route path="add-wisata" element={<AddWisata />} />
+              <Route path="update-wisata" element={<UpdateWisata />} />
+              <Route path="profile" element={<AdminProfile />} />
+            </Route>
+            <Route path="*" element={<h1>404 Not Found</h1>} />
+          </Routes>
+          <Footer />
+        </Router>
     </>
   );
 }

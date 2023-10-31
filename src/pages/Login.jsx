@@ -12,6 +12,7 @@ import { setLoading } from "../redux/slices/reduxLoadingSlice";
 import { setMessage } from "../redux/slices/reduxMessageSlice";
 import openEye from "../assets/openEye.svg";
 import closeEye from "../assets/closeEye.svg";
+import { setUserData } from "../Helpers/SessionHelper";
 
 const Login = () => {
   const [eye, setEye] = useState(false);
@@ -35,6 +36,7 @@ const Login = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    dispatch(setMessage({ status: "", content: "" }));
   }, []);
 
   const responseLoginGoogle = async (response) => {
@@ -42,26 +44,21 @@ const Login = () => {
     let res = await loginGoogle(response);
 
     console.log("Response DATA : ", res);
-    if (res.message.includes("Error")) {
+    if (res.status == "Error") {
       dispatch(setLoading(false));
-    }
+    } 
 
-    if (res.userId) {
+    if (res.status == "success") {
+      setUserData(res, res.token);
       dispatch(
-        setDataLogin({
-          email: res.email,
-          message: res.message,
-          id: res.userId,
-          img: res.img,
-          name: res.name,
-          isAdmin: res.isAdmin,
-        }),
         setMessage({
-          status: res.status,
-          content: res.message,
+          status: "",
+          content: "",
         })
       );
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } else {
       dispatch(setLoading(false));
       dispatch(
@@ -81,20 +78,12 @@ const Login = () => {
       name: form.current[0].value,
       password: form.current[1].value,
     };
-    console.log("SEND DATA: ", data);
+    // console.log("SEND DATA: ", data);
     let res = await loginApi(data);
 
-    console.log("Response DATA : ", res);
+    // console.log("Response DATA : ", res);
     if (res.status == "success") {
-      dispatch(
-        setDataLogin({
-          email: res.data.email,
-          name: res.data.name,
-          id: res.data.id,
-          img: res.data.img,
-          isAdmin: res.data.isAdmin,
-        })
-      );
+      setUserData(res.data, res.token);
       e.target.reset();
       setTimeout(() => {
         navigate("/");

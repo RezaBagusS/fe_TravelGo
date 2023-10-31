@@ -12,7 +12,6 @@ export const loginApi = async (data) => {
   });
 
   const dataRes = await response.json();
-  localStorage.setItem("token", dataRes.token);
   return {
     status: dataRes.status,
     message: dataRes.message,
