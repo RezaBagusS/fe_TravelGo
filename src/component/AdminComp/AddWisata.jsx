@@ -10,14 +10,25 @@ const AddWisata = () => {
         <label className="text-cust-gray-700 font-medium text-base sm:text-xl">
           {label}
         </label>
-        <input
-          type={type}
-          name={name}
-          required
-          autoComplete="off"
-          className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
-          placeholder={placeholder}
-        />
+        {name == "deskripsi" ? (
+          <textarea
+            className="text-cust-teal-500 text-base font-medium rounded-lg resize-y"
+            placeholder={placeholder}
+            name={name}
+            cols="30"
+            rows="5"
+            autoComplete="off"
+          ></textarea>
+        ) : (
+          <input
+            type={type}
+            name={name}
+            required
+            autoComplete="off"
+            className="text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
+            placeholder={placeholder}
+          />
+        )}
         {note && <p className="text-xs text-cust-teal-500">*{note}</p>}
       </div>
     );

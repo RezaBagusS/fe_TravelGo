@@ -31,7 +31,7 @@ const CardList = ({ data }) => {
             </p>
             <div className="flex justify-start gap-2">
               <Link
-                to={"/admin/update-wisata"}
+                to={"/admin/update-wisata/" + nama.split(" ").join("-")}
                 className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150"
               >
                 Update

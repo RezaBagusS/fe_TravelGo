@@ -14,16 +14,21 @@ const AdminPanel = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (location.pathname.includes("update-wisata")) {
+    console.log("Pathname : UPDATE WISATA BOS");
+  }
+
   const HandlePath = () => {
+
+    if (location.pathname.includes("update-wisata")) {
+      return <UpdateWisata />;
+    }
+
     switch (location.pathname) {
       case "/admin/kelola-wisata":
         return <ListWisata />;
       case "/admin/add-wisata":
         return <AddWisata />;
-      case "/admin/update-wisata":
-        return <UpdateWisata />;
-      case "/admin/profile":
-        return <AdminProfile />;
       default:
         return <h1>404 Not Found</h1>;
     }

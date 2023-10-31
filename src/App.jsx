@@ -35,8 +35,7 @@ function App() {
             <Route path="/admin/*" element={<AdminPanel />}>
               <Route path="kelola-wisata" element={<ListWisata />} />
               <Route path="add-wisata" element={<AddWisata />} />
-              <Route path="update-wisata" element={<UpdateWisata />} />
-              <Route path="profile" element={<AdminProfile />} />
+              <Route path="update-wisata/:wisataTitle" element={<UpdateWisata />} />
             </Route>
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>

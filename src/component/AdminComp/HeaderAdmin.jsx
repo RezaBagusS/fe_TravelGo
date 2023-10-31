@@ -7,13 +7,16 @@ const HeaderAdmin = () => {
   const location = useLocation();
 
   const HandleTitle = () => {
+    
+    if (location.pathname.includes("update-wisata")) {
+      return "Update Wisata";
+    }
+
     switch (location.pathname) {
       case "/admin/kelola-wisata":
         return "List Wisata";
       case "/admin/add-wisata":
         return "Tambah Wisata";
-      case "/admin/update-wisata":
-        return "Update Wisata";
       case "/admin/profile":
         return "Profile Admin";
       default:
@@ -36,7 +39,9 @@ const HeaderAdmin = () => {
             <h2 className="text-base text-cust-gray-700 font-semibold text-end">
               {name}
             </h2>
-            <p className="text-sm text-cust-gray-500 font-medium text-end">{email}</p>
+            <p className="text-sm text-cust-gray-500 font-medium text-end">
+              {email}
+            </p>
           </div>
           <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-cust-gray-500">
             <img src={img} alt="MissingIMG" />

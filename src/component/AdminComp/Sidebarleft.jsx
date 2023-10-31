@@ -35,15 +35,6 @@ const SidebarLeft = () => {
             <img src={add} className="w-full" alt="MissingIMG" />
           </Link>
         </div>
-        <div className="flex justify-center w-full items-center">
-          <Link
-            to={"/admin/profile"}
-            className={`cursor-pointer hover:bg-gray-100 w-16 h-16 rounded-2xl p-2 transition-all duration-150
-            ${location.pathname === "/admin/profile" && "bg-gray-100"}`}
-          >
-            <img src={profile} className="w-full" alt="MissingIMG" />
-          </Link>
-        </div>
       </div>
       <div className="flex justify-center w-full items-center pb-5">
         <Link
