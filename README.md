@@ -1,6 +1,6 @@
 
 # Travel Go
-<p align="center"><a href="https://fe-travel-go.vercel.app/" target="_blank"><img src="https://res.cloudinary.com/dbapkghnt/image/upload/v1698713962/TravelGo_hlderv.png" width="400" alt="MedEase Logo"></a></p>
+<p align="center"><a href="https://fe-travel-go.vercel.app/" target="_blank"><img src="https://res.cloudinary.com/dbapkghnt/image/upload/v1698714509/Group_8_tudujt.png" width="400" alt="MedEase Logo"></a></p>
 
 ## Link Website TravelGo
 
