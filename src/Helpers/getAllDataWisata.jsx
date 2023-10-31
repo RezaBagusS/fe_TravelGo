@@ -1,5 +1,5 @@
-// const backendURL = "https://be-travel-go.vercel.app";
-const backendURL = "http://localhost:3000";
+const backendURL = "https://be-travel-go.vercel.app";
+// const backendURL = "http://localhost:3000";
 
 export const getAllDataWisata = async () => {
   try {
@@ -10,12 +10,11 @@ export const getAllDataWisata = async () => {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({
-        token: localStorage.getItem("token"),
+        token: localStorage.getItem("travelGo_U238T"),
       }),
     });
 
     let data = await res.json();
-
     return data;
 
   } catch (error) {

@@ -22,9 +22,9 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/user/virtual-tour" element={<VirtualTour />} />
+            <Route path="/virtual-tour" element={<VirtualTour />} />
             <Route
-              path="/user/virtual-tour/:wisataTitle"
+              path="/virtual-tour/:wisataTitle"
               element={<DinamicVirtualTour />}
             />
             <Route path="/kontak" element={<Kontak />} />

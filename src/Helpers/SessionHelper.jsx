@@ -1,6 +1,10 @@
 import { jwtDecode  } from "jwt-decode";
 import { Navigate } from "react-router-dom";
 
+// travelGo_U9d72 = userData
+// travelGo_U238T = token
+// travelGo_E723S = exp
+
 export const invalidateSession = () => localStorage.clear();
 
 export const setUserData = (userData, token) => {

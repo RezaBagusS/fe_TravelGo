@@ -14,7 +14,7 @@ const dataListNavbar = [
   },
   {
     name: "Virtual Tour",
-    link: "/user/virtual-tour",
+    link: "/virtual-tour",
   },
   {
     name: "Eksplorasi",
@@ -75,7 +75,7 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
           <>
             <div className="flex flex-col gap-4 justify-center items-center w-full md:hidden relative bg-slate-300 rounded-xl py-2 px-3">
               <div className="flex justify-center items-center gap-2">
-                <span className="px-3 h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
+                <span className="px-3 pointer-events-none h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
                   {getUser().isAdmin ? "Admin" : "User"}
                 </span>
                 <img
@@ -291,7 +291,7 @@ const Navbar = () => {
           </div>
           {getActiveUser() ? (
             <div className="hidden md:flex items-center gap-3">
-              <span className="px-3 h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
+              <span className="px-3 pointer-events-none h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
                 {getUser().isAdmin ? "Admin" : "User"}
               </span>
               <div className="flex relative bg-slate-300 rounded-full p-1">
