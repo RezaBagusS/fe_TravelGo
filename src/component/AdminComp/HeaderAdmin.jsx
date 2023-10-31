@@ -15,7 +15,7 @@ const HeaderAdmin = () => {
       case "/admin/update-wisata":
         return "Update Wisata";
       case "/admin/profile":
-        return "Profile";
+        return "Profile Admin";
       default:
         return "404 Not Found";
     }
