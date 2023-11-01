@@ -102,6 +102,7 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
                 onClick={() => {
                   invalidateSession();
                   setOpenSideBar(false);
+                  window.location.reload();
                 }}
               >
                 Log out
@@ -323,6 +324,7 @@ const Navbar = () => {
                       onClick={() => {
                         invalidateSession();
                         handleDropdown();
+                        window.location.reload();
                       }}
                       className="w-full cursor-pointer text-end hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150"
                     >

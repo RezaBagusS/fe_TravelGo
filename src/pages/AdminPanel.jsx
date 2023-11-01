@@ -5,7 +5,6 @@ import ListWisata from "../component/AdminComp/ListWisata";
 import AddWisata from "../component/AdminComp/AddWisata";
 import UpdateWisata from "../component/AdminComp/UpdateWisata";
 import HeaderAdmin from "../component/AdminComp/HeaderAdmin";
-import AdminProfile from "../component/AdminComp/AdminProfile";
 
 const AdminPanel = () => {
   const location = useLocation();

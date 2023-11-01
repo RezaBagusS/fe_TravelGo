@@ -1,5 +1,8 @@
 import { useState } from "react";
 import search from "../assets/search.svg";
+import { Link } from "react-router-dom";
+import { getActiveUser } from "../Helpers/SessionHelper";
+import { motion } from "framer-motion";
 
 const dataWisata = [
   {
@@ -64,6 +67,38 @@ const Eksplorasi = () => {
     );
   };
 
+  const ModalToLogin = () => {
+    return (
+      <div className="w-screen h-screen fixed overflow-hidden top-0 left-0 flex justify-center items-center z-50 bg-black/70 ">
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0 }}
+          transition={{ duration: 0.3 }}
+          className="w-5/12 h-[40vh] relative rounded-3xl flex flex-col gap-5 items-center pt-20 pb-5 bg-cust-teal-50"
+        >
+          <div className="absolute -top-1/2 translate-y-1/2 p-5 aspect-square w-32 border-8 border-cust-teal-50 rounded-full bg-white">
+            <img
+              src="https://res.cloudinary.com/dr0lbokc5/image/upload/v1698847585/sign-warning-icon_34355_jxgqsf.png"
+              className="w-full"
+              alt="Icon"
+            />
+          </div>
+          <h2 className="font-bold text-3xl">Warning</h2>
+          <p className="font-medium text-lg">
+            Login terlebih dahulu untuk mengakses halaman ini!!
+          </p>
+          <Link
+            to={"/auth/login"}
+            className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-150"
+          >
+            Login
+          </Link>
+        </motion.div>
+      </div>
+    );
+  };
+
   const HeaderMenu = () => {
     return (
       <div className="grid grid-cols-12 gap-3">
@@ -116,9 +151,7 @@ const Eksplorasi = () => {
                 <div
                   className={`w-full h-full absolute bg-black flex justify-center items-center p-2 transition-all duration-500
                     ${
-                      isHover && idHover == data.id
-                        ? "opacity-40"
-                        : "opacity-0"
+                      isHover && idHover == data.id ? "opacity-40" : "opacity-0"
                     }
                 `}
                 >
@@ -134,7 +167,9 @@ const Eksplorasi = () => {
                         fill="white"
                       />
                     </svg>
-                    <p className="text-lg font-bold text-center text-white/80">View</p>
+                    <p className="text-lg font-bold text-center text-white/80">
+                      View
+                    </p>
                   </div>
                 </div>
                 <img
@@ -151,8 +186,9 @@ const Eksplorasi = () => {
   };
 
   return (
-    <div className="cust-outer-container text-black">
+    <div className="cust-outer-container relative text-black">
       <div className="cust-container pt-20">
+        {!getActiveUser() && <ModalToLogin />}
         <HeaderMenu />
         <TableIMG />
       </div>

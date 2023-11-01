@@ -1,4 +1,5 @@
 import TagHome from "../TagHome";
+import { Link } from "react-router-dom";
 
 const KeberagamanIndonesia = () => {
   return (
@@ -22,9 +23,9 @@ const KeberagamanIndonesia = () => {
             Daerah yang bisa kalian nikmati di Indonesia yang kaya akan budaya
             dan keberagamanya..
           </p>
-          <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150">
+          <Link to={"/virtual-tour"} className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150">
             Selengkapnya
-          </button>
+          </Link>
         </div>
         <div className="hidden md:flex justify-center md:justify-end">
           <img

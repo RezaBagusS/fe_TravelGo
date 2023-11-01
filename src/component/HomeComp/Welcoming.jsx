@@ -2,9 +2,12 @@ import ReactPlayer from "react-player";
 import { useState, useEffect } from "react";
 import ballPattern from "../../assets/ball-pattern.svg";
 import dotPattern from "../../assets/dot-pattern.svg";
+import { Link } from "react-router-dom";
+import { getActiveUser } from "../../Helpers/SessionHelper";
 
 const Welcoming = () => {
   const [widthPlayer, setWidthPlayer] = useState(800);
+  const [pathEksplorasi, setPathEksplorasi] = useState("/auth/login");
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,6 +22,14 @@ const Welcoming = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (getActiveUser()) {
+      setPathEksplorasi("/user/eksplorasi");
+    } else {
+      setPathEksplorasi("/auth/login");
+    }
+  }, [getActiveUser()]);
+
   return (
     <div className="pt-16">
       <div className="cust-container relative flex justify-center py-16">
@@ -32,12 +43,18 @@ const Welcoming = () => {
             di Indonesia
           </p>
           <div className="flex gap-5">
-            <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-xs sm:text-sm font-semibold px-6 py-2 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150">
+            <Link
+              to={"/virtual-tour"}
+              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-xs sm:text-sm font-semibold px-6 py-2 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150"
+            >
               Mulai Sekarang
-            </button>
-            <button className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-cust-gray-500 text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150">
+            </Link>
+            <Link
+              to={pathEksplorasi}
+              className="border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-cust-gray-500 text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-150"
+            >
               Eksplorasi
-            </button>
+            </Link>
           </div>
           <div className="overflow-hidden mt-10 rounded-3xl border-4 border-cust-gray-500">
             <ReactPlayer
