@@ -21,7 +21,7 @@ const CardWisata = ({ data }) => {
         </p>
 
         <Link
-          to={`/virtual-tour/${data.nama.split(" ").join("-")}`}
+          to={`/virtual-tour/${data.nama.split(" ").join("-").toLowerCase()}`}
           className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-xs sm:text-sm font-semibold px-6 py-2 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150"
         >
           Selengkapnya

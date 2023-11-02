@@ -1,13 +1,15 @@
 import { useRef } from "react";
 import { updateWisataApi } from "../../Helpers/handleWisata";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setPopup } from "../../redux/slices/reduxPopupSlice";
 
 const UpdateWisata = () => {
   const form = useRef();
   const { wisataTitle } = useParams();
-  const dataWisata = useSelector((state) => state.dataWisata.dataWisata);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dataWisata = useSelector((state) => state.dataWisata.data);
 
   const getDataWisata = () => {
     let filteredData = dataWisata.filter(
@@ -58,26 +60,53 @@ const UpdateWisata = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // dispatch(setLoading(true));
+    dispatch(
+      setPopup({
+        show: true,
+        type: "loading",
+        title: "LOADING",
+        message: "Mencoba Mengirim Data . . .",
+      })
+    );
+
     let data = {
       id: getDataWisata().id,
-      name: form.current[0].value,
-      deskripsi: form.current[1].value,
-      lokasi: form.current[2].value,
+      nama: form.current[0].value,
+      lokasi: form.current[1].value,
+      deskripsi: form.current[2].value,
       gambar: form.current[3].value,
       virtualTour: form.current[4].value,
     };
+
     console.log("SEND DATA WISATA: ", data);
     let res = await updateWisataApi(data);
 
-    console.log("Response DATA : ", res);
-    // dispatch(setLoading(false));
-    // e.target.reset();
-    // let dataMessage = {
-    //   status: res.status,
-    //   content: res.message,
-    // };
-    // dispatch(setMessage(dataMessage));
+    if (res.status == "success") {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "success",
+          title: "SUCCESS",
+          message: `Berhasil Mengupdate Data`,
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+            navigate("/admin/kelola-wisata");
+          },
+        })
+      );
+    } else {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "warning",
+          title: "WARNING",
+          message: "Gagal Mengirim Data",
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+          },
+        })
+      );
+    }
   };
 
   return (

@@ -95,13 +95,11 @@ const TableWisata = () => {
 
   useEffect(() => {
     if (keyword == "") {
-      console.log("Keyword Kosong");
       setFilteredData(dataWisata);
     } else {
-      console.log("Keyword TERISI");
       const filter = dataWisata.filter((data) => {
         return data.nama.toLowerCase().includes(keyword.toLowerCase());
-      })
+      });
       setFilteredData(filter);
     }
   }, [keyword]);
@@ -122,13 +120,19 @@ const TableWisata = () => {
         />
       </div>
       <div className="py-3 grid grid-cols-1 md:grid-cols-2 gap-5">
-        {loading
-          ? repeatCard.map((item) => {
-              return <CardSkeleton key={item} />;
-            })
-          : filteredData.map((data) => {
-              return <CardWisata data={data} key={data.id} />;
-            })}
+        {loading ? (
+          repeatCard.map((item) => {
+            return <CardSkeleton key={item} />;
+          })
+        ) : filteredData.length > 0 ? (
+          filteredData.map((data) => {
+            return <CardWisata data={data} key={data.id} />;
+          })
+        ) : (
+          <div className="w-full flex justify-center items-center col-span-1 md:col-span-2">
+            <h2 className="text-cust-gray-500 text-xl">Data Tidak Ditemukan</h2>
+          </div>
+        )}
       </div>
     </div>
   );

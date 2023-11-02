@@ -28,8 +28,8 @@ const CardList = ({ data }) => {
     );
   };
 
-  const handleConfirmDelete = (id) => {
-    const res = deleteWisataApi(id);
+  const handleConfirmDelete = async (id) => {
+    const res = await deleteWisataApi(id);
 
     dispatch(
       setPopup({
@@ -50,6 +50,7 @@ const CardList = ({ data }) => {
           message: "Data Wisata Berhasil Dihapus",
           onConfirm: () => {
             dispatch(setPopup({ show: false }));
+            window.location.reload();
           },
         })
       );
@@ -140,7 +141,7 @@ const ListWisata = () => {
   const fetchingData = async () => {
     dispatch(setLoading(true));
     const res = await getAllDataWisata();
-    console.log("Response Data Wisata : ", res);
+    // console.log("Response Data Wisata : ", res);
     const defaultMessage = {
       status: res.status,
       content: res.message,
@@ -159,10 +160,6 @@ const ListWisata = () => {
 
     fetchingData();
   }, []);
-
-  useEffect(() => {
-
-  }, [data]);
 
   const repeatCard = [0, 1, 2, 3, 4, 5];
 

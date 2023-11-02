@@ -136,7 +136,7 @@ const Register = () => {
                 type="text"
                 name="name"
                 pattern="[A-Za-z\s]{3,}"
-                className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
+                className="text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
                 placeholder="Isi Nama Pengguna Kamu"
               />
               <p className="text-xs text-cust-gray-500">
@@ -152,7 +152,7 @@ const Register = () => {
                 autoComplete="off"
                 type="email"
                 name="email"
-                className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
+                className="text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
                 placeholder="Isi Kata Sandi Kamu"
               />
             </div>
@@ -167,7 +167,7 @@ const Register = () => {
                   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
                   type={eye ? "text" : "password"}
                   name="password"
-                  className="w-full text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
+                  className="w-full text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
                   placeholder="Konfirmasi Kata Sandi"
                 />
                 <img

@@ -5,7 +5,7 @@ import ListWisata from "../component/AdminComp/ListWisata";
 import AddWisata from "../component/AdminComp/AddWisata";
 import UpdateWisata from "../component/AdminComp/UpdateWisata";
 import HeaderAdmin from "../component/AdminComp/HeaderAdmin";
-import { getActiveUser } from "../Helpers/SessionHelper";
+import { getActiveUser, getUser } from "../Helpers/SessionHelper";
 import { setPopup } from "../redux/slices/reduxPopupSlice";
 import { useDispatch } from "react-redux";
 
@@ -17,7 +17,8 @@ const AdminPanel = () => {
     window.scrollTo(0, 0);
 
     if (getActiveUser()) {
-      if (getActiveUser().isAdmin != "TRUE") {
+      console.log("User : ", getUser());
+      if (!getUser().isAdmin) {
         dispatch(
           setPopup({
             show: true,
