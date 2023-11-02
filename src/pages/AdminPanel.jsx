@@ -5,20 +5,50 @@ import ListWisata from "../component/AdminComp/ListWisata";
 import AddWisata from "../component/AdminComp/AddWisata";
 import UpdateWisata from "../component/AdminComp/UpdateWisata";
 import HeaderAdmin from "../component/AdminComp/HeaderAdmin";
+import { getActiveUser } from "../Helpers/SessionHelper";
+import { setPopup } from "../redux/slices/reduxPopupSlice";
+import { useDispatch } from "react-redux";
 
 const AdminPanel = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    if (getActiveUser()) {
+      if (getActiveUser().isAdmin != "TRUE") {
+        dispatch(
+          setPopup({
+            show: true,
+            type: "warning",
+            title: "WARNING",
+            message: "Anda tidak memiliki akses ke halaman ini!!",
+            onConfirm: () => {
+              dispatch(setPopup({ show: false }));
+              window.location.replace("/");
+            },
+          })
+        );
+      } 
+    } else {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "warning",
+          title: "WARNING",
+          message: "Login terlebih dahulu untuk mengakses halaman ini...",
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+            window.location.replace("/auth/login");
+          },
+        })
+      );
+    }
+      
   }, []);
 
-  if (location.pathname.includes("update-wisata")) {
-    console.log("Pathname : UPDATE WISATA BOS");
-  }
-
   const HandlePath = () => {
-
     if (location.pathname.includes("update-wisata")) {
       return <UpdateWisata />;
     }

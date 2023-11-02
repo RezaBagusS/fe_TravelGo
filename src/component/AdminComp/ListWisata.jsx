@@ -4,6 +4,7 @@ import { setLoading } from "../../redux/slices/reduxLoadingSlice";
 import { getAllDataWisata } from "../../Helpers/getAllDataWisata";
 import { setMessage } from "../../redux/slices/reduxMessageSlice";
 import { setDataWisata } from "../../redux/slices/reduxDataWisataSlice";
+import { setPopup } from "../../redux/slices/reduxPopupSlice";
 import { Link } from "react-router-dom";
 import { deleteWisataApi } from "../../Helpers/handleWisata";
 
@@ -13,11 +14,59 @@ const CardList = ({ data }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
-    dispatch(setLoading(true));
-    const res = deleteWisataApi(id)
+    dispatch(
+      setPopup({
+        show: true,
+        type: "confirm",
+        title: "CONFIRMATION",
+        message: "Apakah anda yakin ingin menghapus data wisata ini?",
+        onConfirm: () => handleConfirmDelete(id),
+        onCancel: () => {
+          dispatch(setPopup({ show: false }));
+        },
+      })
+    );
+  };
+
+  const handleConfirmDelete = (id) => {
+    const res = deleteWisataApi(id);
+
+    dispatch(
+      setPopup({
+        show: true,
+        type: "loading",
+        title: "LOADING",
+        message: "Tunggu sebentar ya . . .",
+      })
+    );
+
     console.log("Response Delete Wisata : ", res);
-    dispatch(setLoading(false));
-  }
+    if (res.status == "success") {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "success",
+          title: "SUCCESS",
+          message: "Data Wisata Berhasil Dihapus",
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+          },
+        })
+      );
+    } else {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "warning",
+          title: "WARNING",
+          message: "Data Wisata Gagal Dihapus",
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+          },
+        })
+      );
+    }
+  };
 
   return (
     <div className="w-full">
@@ -46,9 +95,10 @@ const CardList = ({ data }) => {
               >
                 Update
               </Link>
-              <button 
-              onClick={() => handleDelete(data.id)}
-              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150">
+              <button
+                onClick={() => handleDelete(data.id)}
+                className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150"
+              >
                 Delete
               </button>
             </div>
@@ -84,7 +134,7 @@ const CardListSkeleton = () => {
 
 const ListWisata = () => {
   const loading = useSelector((state) => state.loading.loading);
-  const data = useSelector((state) => state.dataWisata.dataWisata);
+  const data = useSelector((state) => state.dataWisata.data);
   const dispatch = useDispatch();
 
   const fetchingData = async () => {
@@ -105,14 +155,16 @@ const ListWisata = () => {
   };
 
   useEffect(() => {
-    dispatch(setLoading(false));
+    window.scrollTo(0, 0);
 
     fetchingData();
   }, []);
 
-  const repeatCard = [
-    0,1,2,3,4,5
-  ]
+  useEffect(() => {
+
+  }, [data]);
+
+  const repeatCard = [0, 1, 2, 3, 4, 5];
 
   return (
     <div className="grid grid-cols-2 gap-x-7 gap-y-5 pb-10">

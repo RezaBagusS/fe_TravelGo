@@ -1,10 +1,13 @@
 import { useRef } from "react";
 import { addWisataApi } from "../../Helpers/handleWisata";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPopup } from "../../redux/slices/reduxPopupSlice";
 
 const AddWisata = () => {
   const form = useRef();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const InputComp = ({ label, type, name, placeholder, note = "" }) => {
     return (
@@ -36,11 +39,22 @@ const AddWisata = () => {
     );
   };
 
-  const handleSubmit = async (e) => {
+  const handleClosePopup = () => {
+    dispatch(setPopup({ show: false }));
+    return navigate("/admin/kelola-wisata");
+  };
 
+  const handleSubmit = async (e) => {
+    dispatch(
+      setPopup({
+        show: true,
+        type: "loading",
+        title: "LOADING",
+        message: "Tunggu sebentar ya . . .",
+      })
+    );
     e.preventDefault();
 
-    // dispatch(setLoading(true));
     let data = {
       nama: form.current[0].value,
       deskripsi: form.current[1].value,
@@ -48,18 +62,36 @@ const AddWisata = () => {
       gambar: form.current[3].value,
       virtualTour: form.current[4].value,
     };
+
     console.log("SEND DATA WISATA: ", data);
     let res = await addWisataApi(data);
 
     console.log("Response DATA : ", res);
-    // dispatch(setLoading(false));
-    e.target.reset();
-    navigate("/admin/list-wisata")
-    let dataMessage = {
-      status: res.status,
-      content: res.message,
-    };
-    // dispatch(setMessage(dataMessage));
+    if (res.status == "success") {
+      e.target.reset();
+      dispatch(
+        setPopup({
+          show: true,
+          type: "success",
+          title: "SUCCESS",
+          message: "Data Wisata Berhasil Ditambahkan",
+          onConfirm: () => handleClosePopup(),
+        })
+      );
+    } else {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "warning",
+          title: "WARNING",
+          message: "Data Wisata Gagal Ditambahkan",
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+          },
+        })
+      );
+    }
+
   };
 
   return (

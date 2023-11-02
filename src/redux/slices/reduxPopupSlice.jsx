@@ -4,7 +4,7 @@ const popupSlice = createSlice({
   name: "popup",
   initialState: {
     data: {
-    show: false,
+        show: false,
       type: "warning",
       title: "LOADING",
       message: "Tunggu sebentar ya . . .",
