@@ -1,18 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dataLoginReducer from "./slices/reduxDataLoginSlice";
 import loadingReducer from "./slices/reduxLoadingSlice";
 import idClientReducer from "./slices/reduxIdClientSlice";
 import messageReducer from "./slices/reduxMessageSlice";
 import dataWisataReducer from "./slices/reduxDataWisataSlice";
+import popupReducer from "./slices/reduxPopupSlice";
+import popupFunctionsMiddleware from "./middlewares/popupFunctionsMiddleware";
 
 const store = configureStore({
     reducer: {
-        dataLogin: dataLoginReducer,
+        popup: popupReducer,
         loading: loadingReducer,
         idClient: idClientReducer,
         message: messageReducer,
         dataWisata: dataWisataReducer,
     },
+    middleware: [popupFunctionsMiddleware]
 })
 
 console.log("On Create Store Changed : ", store.getState());

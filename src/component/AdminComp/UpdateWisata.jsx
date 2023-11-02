@@ -3,6 +3,7 @@ import { updateWisataApi } from "../../Helpers/handleWisata";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
 const UpdateWisata = () => {
   const form = useRef();
   const { wisataTitle } = useParams();
@@ -14,8 +15,6 @@ const UpdateWisata = () => {
     );
     return filteredData[0];
   };
-
-  console.log("DATA WISATA : ", getDataWisata());
 
   const InputComp = ({
     label,
@@ -59,8 +58,9 @@ const UpdateWisata = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
     let data = {
+      id: getDataWisata().id,
       name: form.current[0].value,
       deskripsi: form.current[1].value,
       lokasi: form.current[2].value,
@@ -71,13 +71,13 @@ const UpdateWisata = () => {
     let res = await updateWisataApi(data);
 
     console.log("Response DATA : ", res);
-    dispatch(setLoading(false));
-    e.target.reset();
-    let dataMessage = {
-      status: res.status,
-      content: res.message,
-    };
-    dispatch(setMessage(dataMessage));
+    // dispatch(setLoading(false));
+    // e.target.reset();
+    // let dataMessage = {
+    //   status: res.status,
+    //   content: res.message,
+    // };
+    // dispatch(setMessage(dataMessage));
   };
 
   return (

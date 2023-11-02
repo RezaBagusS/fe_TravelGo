@@ -7,9 +7,9 @@ import { loginGoogle } from "../Helpers/loginGoogle";
 import { loginApi } from "../Helpers/login";
 import googleIcon from "../assets/google-icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { setDataLogin } from "../redux/slices/reduxDataLoginSlice";
 import { setLoading } from "../redux/slices/reduxLoadingSlice";
 import { setMessage } from "../redux/slices/reduxMessageSlice";
+import { setPopup } from "../redux/slices/reduxPopupSlice";
 import openEye from "../assets/openEye.svg";
 import closeEye from "../assets/closeEye.svg";
 import { setUserData } from "../Helpers/SessionHelper";
@@ -39,14 +39,29 @@ const Login = () => {
     dispatch(setMessage({ status: "", content: "" }));
   }, []);
 
+  const closePopupAndNavigate = () => {
+    setTimeout(() => {
+      dispatch(setPopup({ show: false }));
+      navigate("/");
+    }, 400);
+  };
+
   const responseLoginGoogle = async (response) => {
-    dispatch(setLoading(true));
+    dispatch(
+      setPopup({
+        show: true,
+        type: "loading",
+        title: "LOADING",
+        message: "Tunggu sebentar ya . . .",
+      })
+    );
+
     let res = await loginGoogle(response);
 
     console.log("Response DATA : ", res);
     if (res.status == "Error") {
-      dispatch(setLoading(false));
-    } 
+      dispatch(setPopup({ show: false }));
+    }
 
     if (res.status == "success") {
       setUserData(res, res.token);
@@ -57,10 +72,20 @@ const Login = () => {
         })
       );
       setTimeout(() => {
-        navigate("/");
+        dispatch(
+          setPopup({
+            show: true,
+            type: "success",
+            title: "SUCCESS",
+            message: "Berhasil Login",
+            onConfirm: () => {
+              closePopupAndNavigate();
+            },
+          })
+        );
       }, 1000);
     } else {
-      dispatch(setLoading(false));
+      dispatch(setPopup({ show: false }));
       dispatch(
         setMessage({
           status: res.status,
@@ -73,7 +98,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
+    dispatch(
+      setPopup({
+        show: true,
+        type: "loading",
+        title: "LOADING",
+        message: "Tunggu sebentar ya . . .",
+      })
+    );
     let data = {
       name: form.current[0].value,
       password: form.current[1].value,
@@ -86,10 +119,21 @@ const Login = () => {
       setUserData(res.data, res.token);
       e.target.reset();
       setTimeout(() => {
-        navigate("/");
+        dispatch(
+          setPopup({
+            show: true,
+            type: "success",
+            title: "SUCCESS",
+            message: "Berhasil Login",
+            onConfirm: () => {
+              closePopupAndNavigate();
+            },
+          })
+        );
       }, 1000);
     } else {
-      dispatch(setLoading(false));
+      // dispatch(setLoading(false));
+      dispatch(setPopup({ show: false }));
       let dataMessage = {
         status: res.status,
         content: res.message,
@@ -100,7 +144,7 @@ const Login = () => {
 
   return (
     <div className="relative cust-outer-container bg-[url('https://res.cloudinary.com/dr0lbokc5/image/upload/v1698304423/Group_12_1_rpb6gz.png')] bg-cover bg-center">
-      {objLoading && (
+      {/* {objLoading && (
         <div className="fixed z-50 w-full h-screen bg-black/50 flex justify-center items-center">
           <div className="rounded-3xl w-92 h-fit p-5 bg-white/50 backdrop-blur-lg">
             <svg
@@ -121,7 +165,7 @@ const Login = () => {
             </svg>
           </div>
         </div>
-      )}
+      )} */}
       <div className="cust-container grid grid-cols-1 lg:grid-cols-2 h-screen max-h-[700px] py-5">
         <div className="w-full hidden lg:flex justify-center items-center">
           <img

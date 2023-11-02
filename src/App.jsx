@@ -13,13 +13,14 @@ import AdminPanel from "./pages/AdminPanel";
 import ListWisata from "./component/AdminComp/ListWisata";
 import AddWisata from "./component/AdminComp/AddWisata";
 import UpdateWisata from "./component/AdminComp/UpdateWisata";
-import { getActiveUser } from "./Helpers/SessionHelper";
+import Popup from "./component/Popup";
 
 function App() {
   return (
     <>
       <Router>
         <Navbar />
+        <Popup />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/virtual-tour" element={<VirtualTour />} />

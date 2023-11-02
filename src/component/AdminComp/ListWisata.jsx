@@ -5,9 +5,19 @@ import { getAllDataWisata } from "../../Helpers/getAllDataWisata";
 import { setMessage } from "../../redux/slices/reduxMessageSlice";
 import { setDataWisata } from "../../redux/slices/reduxDataWisataSlice";
 import { Link } from "react-router-dom";
+import { deleteWisataApi } from "../../Helpers/handleWisata";
 
 const CardList = ({ data }) => {
   const { gambar, deskripsi, nama } = data;
+
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(setLoading(true));
+    const res = deleteWisataApi(id)
+    console.log("Response Delete Wisata : ", res);
+    dispatch(setLoading(false));
+  }
 
   return (
     <div className="w-full">
@@ -36,7 +46,9 @@ const CardList = ({ data }) => {
               >
                 Update
               </Link>
-              <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150">
+              <button 
+              onClick={() => handleDelete(data.id)}
+              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-2.5 lg:px-6 py-1 lg:py-2 rounded-lg transition-all duration-150">
                 Delete
               </button>
             </div>

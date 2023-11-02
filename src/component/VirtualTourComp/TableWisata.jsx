@@ -5,40 +5,8 @@ import { useEffect, useState } from "react";
 import propType from "prop-types";
 import { getAllDataWisata } from "../../Helpers/getAllDataWisata";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../redux/slices/reduxLoadingSlice";
 import { setMessage } from "../../redux/slices/reduxMessageSlice";
 import { setDataWisata } from "../../redux/slices/reduxDataWisataSlice";
-
-// const dataWisata = [
-//   {
-//     id: 1,
-//     title: "Pantai Kuta",
-//     dinamicTitle: "pantai-kuta",
-//     desc: "Pantai Kuta adalah sebuah pantai yang terletak di Kecamatan Kuta, Kabupaten Badung, Bali, Indonesia.",
-//     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
-//   },
-//   {
-//     id: 2,
-//     title: "Candi Borobudur",
-//     dinamicTitle: "candi-borobudur",
-//     desc: "Candi Borobudur adalah sebuah candi Buddha yang terletak di Borobudur, Magelang, Jawa Tengah, Indonesia. Lokasi candi ini secara administratif terletak di wilayah Kecamatan Borobudur, Kabupaten Magelang, Provinsi Jawa Tengah, 40 kilometer di sebelah barat laut Yogyakarta, dan 86 kilometer di sebelah barat daya Surakarta.",
-//     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
-//   },
-//   {
-//     id: 3,
-//     title: "Raja Ampat",
-//     dinamicTitle: "raja-ampat",
-//     desc: "Raja Ampat adalah gugusan kepulauan di Provinsi Papua Barat, Indonesia. Kepulauan ini terletak di bagian barat laut Kepala Burung Pulau Papua. Raja Ampat terdiri dari 1.500 pulau kecil yang tercakup dalam empat kabupaten, yaitu Kepulauan Raja Ampat, Kabupaten Sorong, Kabupaten Raja Ampat, dan Kabupaten Teluk Bintuni.",
-//     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
-//   },
-//   {
-//     id: 4,
-//     title: "Pantai Losari",
-//     dinamicTitle: "pantai-losari",
-//     desc: "Pantai Losari adalah sebuah pantai yang terletak di Kelurahan Losari, Kecamatan Ujung Pandang, Kota Makassar, Sulawesi Selatan, Indonesia. Pantai ini terletak tidak jauh dari pusat Kota Makassar, tepatnya di sebelah barat daya Pelabuhan Soekarno-Hatta.",
-//     img: "https://i.ibb.co/0jC3xQ9/pantai-kuta.jpg",
-//   },
-// ];
 
 const SearchBar = ({ handleSearch }) => {
   return (
@@ -75,10 +43,11 @@ const CardSkeleton = () => {
 const TableWisata = () => {
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [keyword, setKeyword] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const dataWisata = useSelector((state) => state.dataWisata.dataWisata);
-  const loading = useSelector((state) => state.loading.loading);
+  const dataWisata = useSelector((state) => state.dataWisata.data);
 
   const handleSearch = (e) => {
     const inputKeyword = e.target.value;
@@ -94,30 +63,48 @@ const TableWisata = () => {
     setTypingTimeout(newTimeout);
   };
 
-  useEffect(() => {
-    const fetchingData = async () => {
-      dispatch(setLoading(true));
-      const res = await getAllDataWisata();
-      console.log("Response Data Wisata : ", res);
-      const defaultMessage = {
-        status: res.status,
-        content: res.message,
-      };
-      if (res.status == "success") {
-        dispatch(setDataWisata(res.data));
-      }
-      dispatch(setMessage(defaultMessage));
-      setTimeout(() => {
-        dispatch(setLoading(false));
-      }, 1000);
+  const fetchingData = async () => {
+    setLoading(true);
+    const res = await getAllDataWisata();
+
+    console.log("Response Data Wisata : ", res);
+
+    if (res.status == "success") {
+      dispatch(setDataWisata(res.data));
+      setFilteredData(res.data);
+    }
+
+    const defaultMessage = {
+      status: res.status,
+      content: res.message,
     };
 
-    fetchingData();
+    dispatch(setMessage(defaultMessage));
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    loading && fetchingData();
+  }, [loading]);
+
+  useEffect(() => {
+    setLoading(true);
   }, []);
 
-  const filteredData = dataWisata?.filter((data) => {
-    return data.nama.toLowerCase().includes(keyword.toLowerCase());
-  });
+  useEffect(() => {
+    if (keyword == "") {
+      console.log("Keyword Kosong");
+      setFilteredData(dataWisata);
+    } else {
+      console.log("Keyword TERISI");
+      const filter = dataWisata.filter((data) => {
+        return data.nama.toLowerCase().includes(keyword.toLowerCase());
+      })
+      setFilteredData(filter);
+    }
+  }, [keyword]);
 
   const repeatCard = [0, 1, 2, 3];
 

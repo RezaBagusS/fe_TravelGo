@@ -1,8 +1,10 @@
 import { useState } from "react";
 import search from "../assets/search.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getActiveUser } from "../Helpers/SessionHelper";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { setPopup } from "../redux/slices/reduxPopupSlice";
 
 const dataWisata = [
   {
@@ -34,6 +36,8 @@ const dataWisata = [
 const Eksplorasi = () => {
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [keyword, setKeyword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     const inputKeyword = e.target.value;
@@ -185,10 +189,26 @@ const Eksplorasi = () => {
     );
   };
 
+  const handleClosePopup = () => {
+    dispatch(setPopup({ show: false }));
+    navigate("/auth/login");
+  };
+
   return (
     <div className="cust-outer-container relative text-black">
       <div className="cust-container pt-20">
-        {!getActiveUser() && <ModalToLogin />}
+        {!getActiveUser() &&
+          setTimeout(() => {
+            dispatch(
+              setPopup({
+                show: true,
+                type: "warning",
+                title: "WARNING",
+                message: "Login terlebih dahulu untuk mengakses halaman ini!!",
+                onConfirm: () => handleClosePopup(),
+              })
+            );
+          }, 1000)}
         <HeaderMenu />
         <TableIMG />
       </div>

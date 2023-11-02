@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const dataWisataSlice = createSlice({
     name: "dataWisata",
     initialState: {
-        dataWisata: [],
+        data: [],
     },
     reducers: {
         setDataWisata: (state, action) => {
-            state.dataWisata = action.payload;
+            state.data = action.payload;
         },
     },
 })

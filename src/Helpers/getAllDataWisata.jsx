@@ -4,14 +4,11 @@ const backendURL = "https://be-travel-go.vercel.app";
 export const getAllDataWisata = async () => {
   try {
     let res = await fetch(`${backendURL}/api/data/wisata`, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify({
-        token: localStorage.getItem("travelGo_U238T"),
-      }),
     });
 
     let data = await res.json();

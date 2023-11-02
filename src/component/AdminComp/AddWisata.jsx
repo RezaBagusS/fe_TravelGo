@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import { addWisataApi } from "../../Helpers/handleWisata";
+import { useNavigate } from "react-router-dom";
 
 const AddWisata = () => {
   const form = useRef();
+  const navigate = useNavigate();
 
   const InputComp = ({ label, type, name, placeholder, note = "" }) => {
     return (
@@ -35,11 +37,12 @@ const AddWisata = () => {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
     let data = {
-      name: form.current[0].value,
+      nama: form.current[0].value,
       deskripsi: form.current[1].value,
       lokasi: form.current[2].value,
       gambar: form.current[3].value,
@@ -49,13 +52,14 @@ const AddWisata = () => {
     let res = await addWisataApi(data);
 
     console.log("Response DATA : ", res);
-    dispatch(setLoading(false));
+    // dispatch(setLoading(false));
     e.target.reset();
+    navigate("/admin/list-wisata")
     let dataMessage = {
       status: res.status,
       content: res.message,
     };
-    dispatch(setMessage(dataMessage));
+    // dispatch(setMessage(dataMessage));
   };
 
   return (
