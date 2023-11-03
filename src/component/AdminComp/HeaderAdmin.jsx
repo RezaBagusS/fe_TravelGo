@@ -2,12 +2,15 @@ import { useLocation } from "react-router-dom";
 import { getUser } from "../../Helpers/SessionHelper";
 
 const HeaderAdmin = () => {
-  const { img, name, email } = getUser();
+  const {
+    img = "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
+    name = "Anonymous",
+    email = "Email Not Found",
+  } = getUser();
 
   const location = useLocation();
 
   const HandleTitle = () => {
-    
     if (location.pathname.includes("update-wisata")) {
       return "Update Wisata";
     }

@@ -6,7 +6,7 @@ import { setPopup } from "../../redux/slices/reduxPopupSlice";
 
 const UpdateWisata = () => {
   const form = useRef();
-  const { wisataTitle } = useParams();
+  const { wisataTitle = "not-found" } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const dataWisata = useSelector((state) => state.dataWisata.data);
@@ -15,6 +15,18 @@ const UpdateWisata = () => {
     let filteredData = dataWisata.filter(
       (item) => item.nama == wisataTitle.split("-").join(" ")
     );
+
+    if (wisataTitle == "not-found" || filteredData.length == 0) {
+      return {
+        id: "",
+        nama: "",
+        lokasi: "",
+        deskripsi: "",
+        gambar: "",
+        virtualTour: "",
+      };
+    }
+
     return filteredData[0];
   };
 
