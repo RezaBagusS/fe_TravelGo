@@ -19,7 +19,7 @@ const CardList = ({ data }) => {
         show: true,
         type: "confirm",
         title: "CONFIRMATION",
-        message: "Apakah anda yakin ingin menghapus data wisata ini?",
+        message: `Apakah anda yakin ingin menghapus ${nama} dalam daftar ini?`,
         onConfirm: () => handleConfirmDelete(id),
         onCancel: () => {
           dispatch(setPopup({ show: false }));
@@ -47,7 +47,7 @@ const CardList = ({ data }) => {
           show: true,
           type: "success",
           title: "SUCCESS",
-          message: "Data Wisata Berhasil Dihapus",
+          message: `${nama} Berhasil Dihapus`,
           onConfirm: () => {
             dispatch(setPopup({ show: false }));
             window.location.reload();
