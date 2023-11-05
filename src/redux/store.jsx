@@ -4,11 +4,13 @@ import idClientReducer from "./slices/reduxIdClientSlice";
 import messageReducer from "./slices/reduxMessageSlice";
 import dataWisataReducer from "./slices/reduxDataWisataSlice";
 import popupReducer from "./slices/reduxPopupSlice";
+import popupUploadReducer from "./slices/reduxPopupUploadSlice";
 import popupFunctionsMiddleware from "./middlewares/popupFunctionsMiddleware";
 
 const store = configureStore({
     reducer: {
         popup: popupReducer,
+        popupUpload: popupUploadReducer,
         loading: loadingReducer,
         idClient: idClientReducer,
         message: messageReducer,

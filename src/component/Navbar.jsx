@@ -248,7 +248,7 @@ const Navbar = () => {
         location.pathname.includes("/admin")
           ? "hidden"
           : "fixed"
-      } z-50 w-full text-base text-cust-gray-500
+      } z-30 w-full text-base text-cust-gray-500
     transition-all duration-150 ${styleScroll}
     `}
     >

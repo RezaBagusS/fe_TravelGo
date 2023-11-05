@@ -14,6 +14,7 @@ import ListWisata from "./component/AdminComp/ListWisata";
 import AddWisata from "./component/AdminComp/AddWisata";
 import UpdateWisata from "./component/AdminComp/UpdateWisata";
 import Popup from "./component/Popup";
+import PopupImage from "./component/PopupImage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Router>
         <Navbar />
         <Popup />
+        <PopupImage />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/virtual-tour" element={<VirtualTour />} />
