@@ -75,9 +75,6 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
           <>
             <div className="flex flex-col gap-4 justify-center items-center w-full md:hidden relative bg-slate-300 rounded-xl py-2 px-3">
               <div className="flex justify-center items-center gap-2">
-                <span className="px-3 pointer-events-none h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
-                  {getUser().isAdmin ? "Admin" : "User"}
-                </span>
                 <img
                   src={handleImgProfile()}
                   className="w-16 h-16 rounded-full pointer-events-none"
@@ -86,6 +83,9 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
                 <div className=" flex flex-col gap-1">
                   <h1 className="text-sm font-semibold">{getUser().email}</h1>
                   <p className="text-xs font-normal">{getUser().name}</p>
+                  <span className="px-3 w-fit pointer-events-none h-fit text-xs py-1 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
+                    {getUser().isAdmin ? "Admin" : "User"}
+                  </span>
                 </div>
               </div>
               {getUser().isAdmin && (

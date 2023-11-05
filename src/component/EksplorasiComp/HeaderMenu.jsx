@@ -2,6 +2,7 @@ import { setPopupUpload } from "../../redux/slices/reduxPopupUploadSlice";
 import search from "../../assets/search.svg";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const SearchBar = ({ defaultData, setLoading, setFilteredData }) => {
   const [typingTimeout, setTypingTimeout] = useState(null);
@@ -52,6 +53,9 @@ const SearchBar = ({ defaultData, setLoading, setFilteredData }) => {
 };
 
 const HeaderMenu = (props) => {
+
+  const dispatch = useDispatch();
+
   return (
     <div className="grid grid-cols-12 gap-3">
       <Link to={"/virtual-tour"} className="col-span-6 md:col-span-2 border-2 border-cust-teal-500 hover:border-cust-teal-500/70  hover:bg-cust-teal-500/70 hover:text-white text-sm text-center font-semibold px-4 py-2 rounded-full transition-all duration-150">

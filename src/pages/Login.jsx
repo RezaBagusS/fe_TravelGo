@@ -144,7 +144,7 @@ const Login = () => {
 
   return (
     <div className="relative cust-outer-container bg-[url('https://res.cloudinary.com/dr0lbokc5/image/upload/v1698304423/Group_12_1_rpb6gz.png')] bg-cover bg-center">
-      <div className="cust-container grid grid-cols-1 lg:grid-cols-2 h-screen max-h-[700px] py-5">
+      <div className="cust-container grid grid-cols-1 lg:grid-cols-2 items-center h-screen max-h-[700px] py-5">
         <div className="w-full hidden lg:flex justify-center items-center">
           <img
             className="w-full"

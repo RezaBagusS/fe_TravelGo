@@ -71,7 +71,7 @@ const Popup = () => {
           animate={{ scale: 1 }}
           exit={{ scale: 0 }}
           transition={{ duration: 0.3 }}
-          className="w-5/12 h-[40vh] relative rounded-3xl flex flex-col gap-5 items-center justify-center text-cust-gray-700 pt-20 pb-8 bg-cust-teal-50"
+          className="w-10/12 md:w-5/12 h-[40vh] relative rounded-3xl flex flex-col gap-5 items-center justify-center text-cust-gray-700 pt-20 pb-8 bg-cust-teal-50"
         >
           <div className="absolute -top-1/2 translate-y-1/2 flex justify-center items-center p-2 aspect-square w-32 border-8 border-cust-teal-50 rounded-full bg-white">
             <HandleImage />
@@ -84,7 +84,7 @@ const Popup = () => {
             {dataPopup.title}
           </h2>
           <p
-            className={`font-medium text-lg w-7/12 text-center ${
+            className={`font-medium text-lg w-10/12 md:w-7/12 text-center ${
               dataPopup.type == "loading" && "animate-pulse"
             }`}
           >
@@ -102,7 +102,7 @@ const Popup = () => {
               </button>
               <button
                 onClick={handleConfirm}
-                className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-150"
+                className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-lg font-semibold px-8 sm:px-6 py-3 sm:py-3 rounded-lg transition-all duration-150"
               >
                 confirm
               </button>
@@ -113,7 +113,7 @@ const Popup = () => {
           {dataPopup.type == "success" && (
             <button
               onClick={handleConfirm}
-              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-150"
+              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-lg font-semibold px-8 sm:px-6 py-3 sm:py-3 rounded-lg transition-all duration-150"
             >
               OKE
             </button>
@@ -123,7 +123,7 @@ const Popup = () => {
           {dataPopup.type == "warning" && (
             <button
               onClick={handleConfirm}
-              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-150"
+              className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-lg font-semibold px-8 sm:px-6 py-3 sm:py-3 rounded-lg transition-all duration-150"
             >
               OKE
             </button>

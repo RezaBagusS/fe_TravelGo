@@ -128,7 +128,7 @@ const PopupImage = () => {
         transition={{ duration: 0.3 }}
         ref={form}
         onSubmit={handleSubmit}
-        className="w-8/12 relative px-10 py-5 bg-white dark:bg-gray-800 rounded-lg flex flex-col gap-5 items-center justify-center"
+        className="w-10/12 md:w-8/12 relative px-10 py-5 bg-white dark:bg-gray-800 rounded-lg flex flex-col gap-5 items-center justify-center"
       >
         <span
           onClick={() => dispatch(setPopupUpload(false))}
@@ -136,7 +136,7 @@ const PopupImage = () => {
         >
           <img src={close} className="w-full" alt="Icon" />
         </span>
-        <h1 className="text-cust-gray-700 font-bold mb-5 text-lg sm:text-2xl">
+        <h1 className="text-cust-gray-700 w-2/3 md:w-full text-center font-bold mb-5 text-lg sm:text-2xl">
           UPLOAD IMAGE EKSPLORASI
         </h1>
         <div className="w-full text-cust-gray-700 flex flex-col gap-2">
