@@ -1,8 +1,8 @@
-// const backendURL = "https://be-travel-go.vercel.app";
-const backendURL = "http://localhost:3000";
+const backendURL = "https://be-travel-go.vercel.app";
+// const backendURL = "http://localhost:3000";
 
 export const uploadImage = async (data) => {
-  console.log("Data Upload nih bos : ", data);
+  // console.log("Data Upload nih bos : ", data);
   try {
     const formData = new FormData();
     formData.append("namaWisata", data.namaWisata);
@@ -38,7 +38,7 @@ export const getAllDataEksplorasi = async () => {
       token: localStorage.getItem("travelGo_U238T"),
     }),
   });
-  
+
   const dataRes = await res.json();
 
   return dataRes;
