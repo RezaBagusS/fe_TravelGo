@@ -16,11 +16,11 @@ const dataMenu = [
   },
   {
     name: "Virtual Tour",
-    link: "/user/virtual-tour",
+    link: "/virtual-tour",
   },
   {
-    name: "Wisata",
-    link: "/user/wisata",
+    name: "Eksplorasi",
+    link: "/user/eksplorasi",
   },
   {
     name: "Kontak",
