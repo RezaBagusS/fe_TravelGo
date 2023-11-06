@@ -1,19 +1,11 @@
 
 # Travel Go
 
-
-
 <p align="center" style="padding-top: 100px; padding-bottom: 100px;">
   <a href="https://fe-travel-go.vercel.app/" target="_blank">
     <img src="https://res.cloudinary.com/dbapkghnt/image/upload/v1698714509/Group_8_tudujt.png" width="400" alt="Logo">
   </a>
 </p>
-
-
-
-## Link Website TravelGo
-
-https://fe-travel-go.vercel.app/
 
 ## Anggota Kelompok Kami
 215150607111002 - Reza Bagus Saputra
@@ -39,23 +31,23 @@ Pengguna TravelGo nantinya adalah admin dan pengguna yaitu wisatawan lokal maupu
 
 ## Cara Penggunaan TravelGo
 
-Beranda
+- Beranda
 
 beranda adalah halaman masuk utama yang memberikan informasi penting mengenai gambaran singkat dan fitur fitur yang ada di TravelGo
 
-Virtual Tour
+- Virtual Tour
 
 Virtual Tour merupakan fitur utama yang ditawarkan oleh TravelGo. Pengguna dapat merasakan pengalaman wisata dengan melihat tempat wisatanya secara virtual terlebih dahulu sebelum mengunjungi ke tempat aslinya.
 
-Kontak
+- Kontak
 
 Kontak merupakan halaman dimana pengguna dapat memberikan keluhan dan feedback kepada pengembang. Pada halaman ini juga terdapat alamat TravelGo.
 
-Tentang
+- Tentang
 
 Tentang merupakan halaman dimana pengguna dapat melihat visi misi dan keunggulan dari TravelGo.
 
-Jelajah wisata
+- Jelajah wisata
 
 Jelajah wisata merupakan tempat dimana pengguna dapat menggunggah foto pengalaman wisata mereka dan berinteraksi dengan pengguna lainnya.
 
