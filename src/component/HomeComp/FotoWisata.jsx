@@ -1,6 +1,19 @@
 import TagHome from "../TagHome";
+import { useState, useEffect } from "react";
+import { getActiveUser } from "../../Helpers/SessionHelper";
+import { Link } from "react-router-dom";
 
 const FotoWisata = () => {
+  const [pathEksplorasi, setPathEksplorasi] = useState("/auth/login");
+
+  useEffect(() => {
+    if (getActiveUser()) {
+      setPathEksplorasi("/user/eksplorasi");
+    } else {
+      setPathEksplorasi("/auth/login");
+    }
+  }, [getActiveUser()]);
+
   return (
     <div className="cust-container py-10 flex flex-col gap-4 ">
       <div className="w-fit mx-auto text-cust-teal-500">
@@ -32,9 +45,9 @@ const FotoWisata = () => {
         />
       </div>
       <div className="w-full flex justify-center mt-2">
-        <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-150">
+        <Link to={pathEksplorasi} className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-150">
           Jelajahi Wisata Lainnya
-        </button>
+        </Link>
       </div>
     </div>
   );

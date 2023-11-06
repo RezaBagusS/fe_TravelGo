@@ -5,25 +5,60 @@ import ListWisata from "../component/AdminComp/ListWisata";
 import AddWisata from "../component/AdminComp/AddWisata";
 import UpdateWisata from "../component/AdminComp/UpdateWisata";
 import HeaderAdmin from "../component/AdminComp/HeaderAdmin";
-import AdminProfile from "../component/AdminComp/AdminProfile";
+import { getActiveUser, getUser } from "../Helpers/SessionHelper";
+import { setPopup } from "../redux/slices/reduxPopupSlice";
+import { useDispatch } from "react-redux";
 
 const AdminPanel = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    if (getActiveUser()) {
+      console.log("User : ", getUser());
+      if (!getUser().isAdmin) {
+        dispatch(
+          setPopup({
+            show: true,
+            type: "warning",
+            title: "WARNING",
+            message: "Anda tidak memiliki akses ke halaman ini!!",
+            onConfirm: () => {
+              dispatch(setPopup({ show: false }));
+              window.location.replace("/");
+            },
+          })
+        );
+      } 
+    } else {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "warning",
+          title: "WARNING",
+          message: "Login terlebih dahulu untuk mengakses halaman ini...",
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+            window.location.replace("/auth/login");
+          },
+        })
+      );
+    }
+      
   }, []);
 
   const HandlePath = () => {
+    if (location.pathname.includes("update-wisata")) {
+      return <UpdateWisata />;
+    }
+
     switch (location.pathname) {
       case "/admin/kelola-wisata":
         return <ListWisata />;
       case "/admin/add-wisata":
         return <AddWisata />;
-      case "/admin/update-wisata":
-        return <UpdateWisata />;
-      case "/admin/profile":
-        return <AdminProfile />;
       default:
         return <h1>404 Not Found</h1>;
     }

@@ -13,19 +13,21 @@ import AdminPanel from "./pages/AdminPanel";
 import ListWisata from "./component/AdminComp/ListWisata";
 import AddWisata from "./component/AdminComp/AddWisata";
 import UpdateWisata from "./component/AdminComp/UpdateWisata";
-import AdminProfile from "./component/AdminComp/AdminProfile";
+import Popup from "./component/Popup";
+import PopupImage from "./component/PopupImage";
 
 function App() {
-
   return (
     <>
       <Router>
         <Navbar />
+        <Popup />
+        <PopupImage />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/user/virtual-tour" element={<VirtualTour />} />
+          <Route path="/virtual-tour" element={<VirtualTour />} />
           <Route
-            path="/user/virtual-tour/:wisataTitle"
+            path="/virtual-tour/:wisataTitle"
             element={<DinamicVirtualTour />}
           />
           <Route path="/kontak" element={<Kontak />} />
@@ -33,11 +35,13 @@ function App() {
           <Route path="/user/eksplorasi" element={<Eksplorasi />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
-          <Route path="/admin/*" element={<AdminPanel />} >
+          <Route path="/admin/*" element={<AdminPanel />}>
             <Route path="kelola-wisata" element={<ListWisata />} />
             <Route path="add-wisata" element={<AddWisata />} />
-            <Route path="update-wisata" element={<UpdateWisata />} />
-            <Route path="profile" element={<AdminProfile />} />
+            <Route
+              path="update-wisata/:wisataTitle"
+              element={<UpdateWisata />}
+            />
           </Route>
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>

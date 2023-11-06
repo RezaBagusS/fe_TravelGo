@@ -7,6 +7,7 @@ import closeEye from "../assets/closeEye.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { setLoading } from "../redux/slices/reduxLoadingSlice";
 import { setMessage } from "../redux/slices/reduxMessageSlice";
+import { setPopup } from "../redux/slices/reduxPopupSlice";
 
 const Register = () => {
   const [eye, setEye] = useState(false);
@@ -20,21 +21,42 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(setLoading(true));
+    dispatch(setPopup({
+      show: true,
+      type: "loading",
+      title: "LOADING",
+      message: "Proses pendaftaran . . .",
+    }));
+
     const res = await registerApi({
       name: e.target.name.value,
       email: e.target.email.value,
       password: e.target.password.value,
     });
+    
     console.log("Response DATA : ", res);
+
     if (res.status == "success") {
-      let dataMessage = {
-        status: res.status,
-        content: res.message,
-      };
-      setTimeout(() => {
-        dispatch(setMessage(dataMessage));
-      }, 2000);
+      dispatch(setPopup({
+        show: true,
+        type: "success",
+        title: "BERHASIL",
+        message: res.message,
+        onConfirm: () => {
+          dispatch(setPopup({ show: false }));
+          navigate("/auth/login");
+        }
+      }));
+    } else {
+      dispatch(setPopup({
+        show: true,
+        type: "error",
+        title: "ERROR",
+        message: res.message,
+        onConfirm: () => {
+          dispatch(setPopup({ show: false }));
+        }
+      }));
     }
 
     e.target.reset();
@@ -53,7 +75,7 @@ const Register = () => {
 
   return (
     <div className="cust-outer-container bg-[url('https://res.cloudinary.com/dr0lbokc5/image/upload/v1698304423/Group_12_1_rpb6gz.png')] bg-cover bg-center">
-      {loading && (
+      {/* {loading && (
         <div className="fixed z-50 w-full h-screen bg-black/50 flex justify-center items-center">
           <div className="rounded-3xl w-96 h-fit p-5 bg-white/50 backdrop-blur-lg">
             {message.status ? (
@@ -99,8 +121,8 @@ const Register = () => {
             )}
           </div>
         </div>
-      )}
-      <div className="cust-container grid grid-cols-1 lg:grid-cols-2 h-screen max-h-[700px] py-3">
+      )} */}
+      <div className="cust-container grid grid-cols-1 lg:grid-cols-2 items-center h-screen max-h-[700px] py-3">
         <div className="w-full hidden lg:flex justify-center items-center">
           <img
             className="w-full"
@@ -136,7 +158,7 @@ const Register = () => {
                 type="text"
                 name="name"
                 pattern="[A-Za-z\s]{3,}"
-                className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
+                className="text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
                 placeholder="Isi Nama Pengguna Kamu"
               />
               <p className="text-xs text-cust-gray-500">
@@ -152,7 +174,7 @@ const Register = () => {
                 autoComplete="off"
                 type="email"
                 name="email"
-                className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
+                className="text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
                 placeholder="Isi Kata Sandi Kamu"
               />
             </div>
@@ -167,7 +189,7 @@ const Register = () => {
                   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
                   type={eye ? "text" : "password"}
                   name="password"
-                  className="w-full text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
+                  className="w-full text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
                   placeholder="Konfirmasi Kata Sandi"
                 />
                 <img

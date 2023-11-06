@@ -2,6 +2,8 @@ import { useRef } from "react";
 import ballPattern from "../../assets/ball-pattern.svg";
 import propType from "prop-types";
 import emailjs from "@emailjs/browser";
+import { useDispatch } from "react-redux";
+import { setPopup } from "../../redux/slices/reduxPopupSlice";
 
 const InputField = ({ placeHolder, name, id, type, labelName }) => {
   return (
@@ -34,11 +36,19 @@ const InputField = ({ placeHolder, name, id, type, labelName }) => {
 };
 
 const FormKontak = () => {
-
+  const dispatch = useDispatch();
   const form = useRef();
 
   const sendEmail = (e) => {
     e.preventDefault();
+    dispatch(
+      setPopup({
+        show: true,
+        type: "loading",
+        title: "LOADING",
+        message: "Sedang mengirim pesan ...",
+      })
+    );
 
     emailjs
       .sendForm(
@@ -49,13 +59,42 @@ const FormKontak = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          dispatch(
+            setPopup({
+              show: true,
+              type: "success",
+              title: "SUCCESS",
+              message: "Pesan berhasil dikirim!",
+              onConfirm: () => {
+                dispatch(
+                  setPopup({
+                    show: false,
+                  })
+                );
+              },
+            })
+          );
         },
         (error) => {
-          console.log(error.text);
+          dispatch(
+            setPopup({
+              show: true,
+              type: "warning",
+              title: "WARNING",
+              message:
+                "Terjadi kesalahan saat mengirim pesan. Silahkan coba lagi.",
+              onConfirm: () => {
+                dispatch(
+                  setPopup({
+                    show: false,
+                  })
+                );
+              },
+            })
+          );
         }
       );
-      e.target.reset();
+    e.target.reset();
   };
 
   return (

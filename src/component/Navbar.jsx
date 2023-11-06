@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import propType from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import { setDataLogin } from "../redux/slices/reduxDataLoginSlice";
+import {
+  invalidateSession,
+  getActiveUser,
+  getUser,
+} from "../Helpers/SessionHelper";
 
 const dataListNavbar = [
   {
@@ -11,7 +14,7 @@ const dataListNavbar = [
   },
   {
     name: "Virtual Tour",
-    link: "/user/virtual-tour",
+    link: "/virtual-tour",
   },
   {
     name: "Eksplorasi",
@@ -29,12 +32,10 @@ const dataListNavbar = [
 
 const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
   const location = useLocation();
-  const dataLogin = useSelector((state) => state.dataLogin.data);
-  const dispatch = useDispatch();
 
   const handleImgProfile = () => {
-    if (dataLogin.img) {
-      return dataLogin.img;
+    if (getUser().img) {
+      return getUser().img;
     } else {
       return "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg";
     }
@@ -48,7 +49,7 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
     >
       <div className="cust-container flex flex-col gap-5 py-5">
         {dataListNavbar.map((data, index) => {
-          return (
+          return getActiveUser() || data.name != "Eksplorasi" ? (
             <Link
               to={data.link}
               onClick={() => setOpenSideBar(false)}
@@ -68,44 +69,40 @@ const SideBarMenu = ({ openSidebar, setOpenSideBar }) => {
               `}
               ></span>
             </Link>
-          );
+          ) : null;
         })}
-        {dataLogin.id != "0" ? (
+        {getActiveUser() ? (
           <>
             <div className="flex flex-col gap-4 justify-center items-center w-full md:hidden relative bg-slate-300 rounded-xl py-2 px-3">
               <div className="flex justify-center items-center gap-2">
-                <span className="px-3 h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
-                  {dataLogin.isAdmin ? "Admin" : "User"}
-                </span>
                 <img
                   src={handleImgProfile()}
                   className="w-16 h-16 rounded-full pointer-events-none"
                   alt="MissingIMG"
                 />
                 <div className=" flex flex-col gap-1">
-                  <h1 className="text-sm font-semibold">{dataLogin.email}</h1>
-                  <p className="text-xs font-normal">{dataLogin.name}</p>
+                  <h1 className="text-sm font-semibold">{getUser().email}</h1>
+                  <p className="text-xs font-normal">{getUser().name}</p>
+                  <span className="px-3 w-fit pointer-events-none h-fit text-xs py-1 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
+                    {getUser().isAdmin ? "Admin" : "User"}
+                  </span>
                 </div>
               </div>
-              <Link
-                to={"/admin/kelola-wisata"}
-                onClick={() => setOpenSideBar(false)}
-                className="w-full bg-slate-100 py-2 text-center font-normal hover:font-semibold rounded-lg hover:bg-slate-200 transition-all duration-100"
-              >
-                Kelola Wisata
-              </Link>
+              {getUser().isAdmin && (
+                <Link
+                  to={"/admin/kelola-wisata"}
+                  onClick={() => setOpenSideBar(false)}
+                  className="w-full bg-slate-100 py-2 text-center font-normal hover:font-semibold rounded-lg hover:bg-slate-200 transition-all duration-100"
+                >
+                  Kelola Wisata
+                </Link>
+              )}
               <button
                 className="w-full bg-red-700 hover:bg-red-700/80 text-white py-2 text-center font-normal hover:font-semibold rounded-lg transition-all duration-100"
                 onClick={() => {
-                  dispatch(
-                    setDataLogin({
-                      email: "Email Not Found",
-                      message: "Message Not Found",
-                      img: "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
-                      id: "0",
-                    })
-                  );
+                  invalidateSession();
                   setOpenSideBar(false);
+                  window.location.reload();
                 }}
               >
                 Log out
@@ -215,8 +212,6 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const location = useLocation();
-  const dispatch = useDispatch();
-  const dataLogin = useSelector((state) => state.dataLogin.data);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -234,17 +229,13 @@ const Navbar = () => {
     };
   });
 
-  useEffect(() => {
-    console.log("DATA LOGIN: ", dataLogin);
-  }, [dataLogin]);
-
   const handleDropdown = () => {
     setOpenDropdown((prev) => !prev);
   };
 
   const handleImgProfile = () => {
-    if (dataLogin.img) {
-      return dataLogin.img;
+    if (getUser().img) {
+      return getUser().img;
     } else {
       return "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg";
     }
@@ -257,7 +248,7 @@ const Navbar = () => {
         location.pathname.includes("/admin")
           ? "hidden"
           : "fixed"
-      } z-50 w-full text-base text-cust-gray-500
+      } z-30 w-full text-base text-cust-gray-500
     transition-all duration-150 ${styleScroll}
     `}
     >
@@ -270,37 +261,39 @@ const Navbar = () => {
           </Link>
           <div className="py-5 hidden md:flex items-center">
             <ul className="flex flex-row justify-between">
-              {dataListNavbar.map((data, index) => (
-                <li
-                  key={index}
-                  className="px-3 xl:px-5 font-medium cursor-pointer hover:text-cust-teal-500 hover:font-semibold"
-                >
-                  <Link
-                    to={data.link}
+              {dataListNavbar.map((data, index) =>
+                getActiveUser() || data.name != "Eksplorasi" ? (
+                  <li
                     key={index}
-                    className="relative group w-fit flex flex-col pb-1 overflow-hidden"
+                    className="px-3 xl:px-5 font-medium cursor-pointer hover:text-cust-teal-500 hover:font-semibold"
                   >
-                    <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-sm lg:text-base whitespace-nowrap font-semibold transition-all duration-100">
-                      {data.name}
-                    </h1>
-                    <span
-                      className={`absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out
+                    <Link
+                      to={data.link}
+                      key={index}
+                      className="relative group w-fit flex flex-col pb-1 overflow-hidden"
+                    >
+                      <h1 className="text-cust-gray-500 hover:text-cust-teal-500 hover:before:border-b-0 hover:after:border-b-2 text-sm lg:text-base whitespace-nowrap font-semibold transition-all duration-100">
+                        {data.name}
+                      </h1>
+                      <span
+                        className={`absolute bottom-0 group-hover:translate-x-0 -translate-x-full w-full bg-cust-teal-500 p-0.5 rounded-full transition-all duration-500 ease-in-out
                       ${
                         data.link == location.pathname
                           ? "translate-x-0"
                           : "group-hover:translate-x-0 -translate-x-full"
                       }
                     `}
-                    ></span>
-                  </Link>
-                </li>
-              ))}
+                      ></span>
+                    </Link>
+                  </li>
+                ) : null
+              )}
             </ul>
           </div>
-          {dataLogin.id != "0" ? (
+          {getActiveUser() ? (
             <div className="hidden md:flex items-center gap-3">
-              <span className="px-3 h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
-                {dataLogin.isAdmin ? "Admin" : "User"}
+              <span className="px-3 pointer-events-none h-fit text-xs py-1 bg-cust-teal-50 ring-1 text-cust-gray-500 ring-cust-gray-700 rounded-full">
+                {getUser().isAdmin ? "Admin" : "User"}
               </span>
               <div className="flex relative bg-slate-300 rounded-full p-1">
                 <img
@@ -313,29 +306,25 @@ const Navbar = () => {
                   <ul className="absolute right-0 text-sm top-full h-fit translate-y-2 rounded-md bg-cust-teal-50 overflow-hidden ring-2 ring-slate-300">
                     <li className="bg-white text-cust-gray-700 text-end flex flex-col gap-1 border-b-2 px-3 py-2 whitespace-nowrap">
                       <h1 className="text-sm font-semibold">
-                        {dataLogin.email}
+                        {getUser().email}
                       </h1>
-                      <p className="text-xs font-normal">{dataLogin.name}</p>
+                      <p className="text-xs font-normal">{getUser().name}</p>
                     </li>
-                    <li className="w-full cursor-pointer text-end px-3 py-2 hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150">
-                      <Link
-                        to={"/admin/kelola-wisata"}
-                        onClick={() => handleDropdown()}
-                      >
-                        Kelola Wisata
-                      </Link>
-                    </li>
+                    {getUser().isAdmin && (
+                      <li className="w-full cursor-pointer text-end px-3 py-2 hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150">
+                        <Link
+                          to={"/admin/kelola-wisata"}
+                          onClick={() => handleDropdown()}
+                        >
+                          Kelola Wisata
+                        </Link>
+                      </li>
+                    )}
                     <li
                       onClick={() => {
-                        dispatch(
-                          setDataLogin({
-                            email: "Email Not Found",
-                            message: "Message Not Found",
-                            img: "https://res.cloudinary.com/dr0lbokc5/image/upload/v1698376676/5856_hntzo9.jpg",
-                            id: "0",
-                          })
-                        );
+                        invalidateSession();
                         handleDropdown();
+                        window.location.reload();
                       }}
                       className="w-full cursor-pointer text-end hover:bg-cust-teal-500/40 hover:text-cust-gray-700 whitespace-nowrap transition-all  duration-150"
                     >

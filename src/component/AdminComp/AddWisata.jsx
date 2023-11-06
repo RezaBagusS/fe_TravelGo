@@ -1,8 +1,13 @@
 import { useRef } from "react";
 import { addWisataApi } from "../../Helpers/handleWisata";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPopup } from "../../redux/slices/reduxPopupSlice";
 
 const AddWisata = () => {
   const form = useRef();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const InputComp = ({ label, type, name, placeholder, note = "" }) => {
     return (
@@ -10,41 +15,83 @@ const AddWisata = () => {
         <label className="text-cust-gray-700 font-medium text-base sm:text-xl">
           {label}
         </label>
-        <input
-          type={type}
-          name={name}
-          required
-          autoComplete="off"
-          className="text-xs sm:text-sm rounded-xl focus:border-none focus:outline-none bg-white"
-          placeholder={placeholder}
-        />
+        {name == "deskripsi" ? (
+          <textarea
+            className="text-cust-teal-500 text-base font-medium rounded-lg resize-y"
+            placeholder={placeholder}
+            name={name}
+            cols="30"
+            rows="5"
+            autoComplete="off"
+          ></textarea>
+        ) : (
+          <input
+            type={type}
+            name={name}
+            required
+            autoComplete="off"
+            className="text-xs sm:text-sm rounded-xl text-cust-teal-500  font-medium focus:border-none focus:outline-none bg-white"
+            placeholder={placeholder}
+          />
+        )}
         {note && <p className="text-xs text-cust-teal-500">*{note}</p>}
       </div>
     );
   };
 
+  const handleClosePopup = () => {
+    dispatch(setPopup({ show: false }));
+    return navigate("/admin/kelola-wisata");
+  };
+
   const handleSubmit = async (e) => {
+    dispatch(
+      setPopup({
+        show: true,
+        type: "loading",
+        title: "LOADING",
+        message: "Tunggu sebentar ya . . .",
+      })
+    );
     e.preventDefault();
 
-    dispatch(setLoading(true));
     let data = {
-      name: form.current[0].value,
+      nama: form.current[0].value,
       deskripsi: form.current[1].value,
       lokasi: form.current[2].value,
       gambar: form.current[3].value,
       virtualTour: form.current[4].value,
     };
+
     console.log("SEND DATA WISATA: ", data);
     let res = await addWisataApi(data);
 
     console.log("Response DATA : ", res);
-    dispatch(setLoading(false));
-    e.target.reset();
-    let dataMessage = {
-      status: res.status,
-      content: res.message,
-    };
-    dispatch(setMessage(dataMessage));
+    if (res.status == "success") {
+      e.target.reset();
+      dispatch(
+        setPopup({
+          show: true,
+          type: "success",
+          title: "SUCCESS",
+          message: "Data Wisata Berhasil Ditambahkan",
+          onConfirm: () => handleClosePopup(),
+        })
+      );
+    } else {
+      dispatch(
+        setPopup({
+          show: true,
+          type: "warning",
+          title: "WARNING",
+          message: "Data Wisata Gagal Ditambahkan",
+          onConfirm: () => {
+            dispatch(setPopup({ show: false }));
+          },
+        })
+      );
+    }
+
   };
 
   return (

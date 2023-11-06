@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import TagHome from "../TagHome";
 
 const KulinerIndonesia = () => {
@@ -23,9 +24,9 @@ const KulinerIndonesia = () => {
               siap mewarnai liburan mu di Indonesia dengan kelezatan yang nikmat
               hanya di Indonesia.
             </p>
-            <button className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150">
+            <Link to={"/virtual-tour"} className="bg-cust-teal-500 hover:bg-cust-teal-500/70 text-white text-sm font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-lg drop-shadow-[0px_3px_3px_rgba(0,0,0,0.2)] transition-all duration-150">
               Selengkapnya
-            </button>
+            </Link>
           </div>
         </div>
       </div>
