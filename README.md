@@ -85,54 +85,74 @@ Tabel Data Pasien
 |5    | password    | text        |'nopalla'                        |
 |6    | gambar      | text        |'https://res.cloudinary.com...'  |
 
-## System Architecture Front End TravelGo  
-- ReactJS versi 18.2.0
-- Vite versi 4.4.5
-- Eslint versi 8.45.0 
-- Yarn versi 1.22.19
+## System Architecture Front End TravelGo 
+
+| System Architecture   | Version     | 
+|:---                   | :---        | 
+|ReactJS                | 18.2.0      | 
+|Vite                   | 4.4.5       |
+|Eslint                 | 8.45.0      |
+|Yarn                   | 1.22.19     |
+
 
 ## Styling : ("2 kolom = tool, versi")
-- TailwindCSS versi 3.3.3
-- Flowbite versi 2.0.0
-- Flowbite React versi 0.6.4
-- Framer Motion versi 10.16.4
 
-## Tools : ("3 kolom = tool, versi, fungsi")
-- @emailjs/browser versi 3.11.0 utk mengirim email
-- @reduxjs/toolkit versi 1.9.7 utk mendukung fungsi react-redux
-- @splidejs/react-splide versi 0.7.12 utk mendukung fungsi react-splide
-- @splidejs/splide versi 4.1.4 utk membuat animasi Carousel
-- gapi-script versi 1.2.0 utk menghandle response react-google-login
-- jwt-decode versi 4.0.0 utk mengkonversi token menjadi data
-- react-dom versi 18.2.0 utk memudahkan dalam manipulasi document
-- react-google-login versi 5.2.2 utk portal login dengan google dengan fungsi Outh Google, dibantu dengan id yang didapatkan dari google.cloud
-- react-iframe versi 1.8.5 utk menghandle iframe virtual tour
-- react-lottie versi 1.2.3 utk menambahkan animasi bergerak dalam bentuk json atau svg
-- react-redux versi 8.1.3 utk memudahkan dalam mengontrol state management di react
-- react-router-dom versi 6.16.0 utk melakukan kontrol terhadap routing browser
+| Tools                 | Version     | 
+|:---                   | :---        | 
+|TailwindCSS            | 3.3.3       | 
+|Flowbite               | 2.0.0       |
+|Flowbite React         | 0.6.4       |
+|Framer Motion          | 10.16.4     |
+
+
+## Tools 
+
+| No  | Tools                   | Version           | Fungsi                                                  |
+|:--- | :---                    | :---              | :---                                                    |
+|1    | @emailjs/browser        | 3.11.0            | mengirim email                                          |
+|2    | @reduxjs/toolkit        | 1.9.7             | mendukung fungsi react-redux                            | 
+|3    | @splidejs/react-splide  | 0.7.12            | mendukung fungsi react-splide                           |
+|4    | gapi-script             | 1.2.0             | menghandle response react-google-login                  |
+|5    | jwt-decode              | 4.0.0             | mengkonversi token menjadi data                         | 
+|6    | react-dom               | 18.2.0            | memudahkan manipulasi document                          |
+|7    | @splidejs/react-splide  | 0.7.12            | mendukung fungsi react-splide                           |
+|8    | react-google-login      | 5.2.2             | portal login dengan google dengan fungsi Outh Google    |
+|9    | react-iframe            | 1.8.5             | menghandle iframe virtual tour                          |
+|10   | react-lottie            | 1.2.3             | menambahkan animasi bergerak dalam bentuk json atau svg |
+|11   | react-redux             | 8.1.3             | memudahkan dalam mengontrol state management di react   |
+|12   | react-router-dom        | 6.16.0            | melakukan kontrol terhadap routing browser              |
+
 
 ## Deployment  
 - Powered by Vercel 
 
-## System Architecture BackEnd TravelGo  
-- NPM versi 9.6.7
-- Nodejs versi 18.17.1
-- ExpressJS versi 4.18.2
-- Nodemon versi 3.0.1
+## System Architecture BackEnd TravelGo 
+
+| System Architecture BackEnd                 | Version     | 
+|:---                                         | :---        | 
+|NPM                                          | 3.3.3       | 
+|Nodejs                                       | 2.0.0       |
+|ExpressJS                                    | 0.6.4       |
+|Nodemon                                      | 10.16.4     |
+
 
 ## Tools 
-- brcypt versi 5.1.1 utk hash password pengguna
-- cors versi 2.8.5 utk mengizinkan permintaan source BackEnd ke FrontEnd
-- dotenv versi 16.3.1 utk mengelola Environment Variable
-- google-auth-library utk mengautentifikasi data login via google pengguna
-- jsonwebtoken versi 9.0.2 utk mengontrol autentifikasi pengguna via database menggunakan JWT
-- multer versi 1.4.5-lts.1 utk mengatasi inputan pengguna dalam bentuk file 
+
+| No  | Tools                   | Version           | Fungsi                                                          |
+|:--- | :---                    | :---              | :---                                                            |
+|1    | brcypt                  | 18.2.0            | hash password pengguna                                          |
+|2    | cors                    | 0.7.12            | mengizinkan permintaan source BackEnd ke FrontEnd               |
+|2    | dotenv                  | 5.2.2             | mengelola Environment Variable                                  |
+|4    | google-auth-library     | 1.8.5             | mengautentifikasi data login via google pengguna                |
+|5    | jsonwebtoken            | 1.2.3             | mengontrol autentifikasi pengguna via database menggunakan JWT  |
+|6    | multer                  | 8.1.3             | mengatasi inputan pengguna dalam bentuk file                    |
+ 
 
 ## Database  
 Supabase.org versi 2.38.4 'https://supabase.com/'
 
 ## API Documentation
-Route API - be-travel-go.vercel.app
+Route API - 'be-travel-go.vercel.app'
 
 ## Endpoint
 
