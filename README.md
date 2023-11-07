@@ -112,4 +112,38 @@ Tabel Data Pasien
 - react-router-dom versi 6.16.0 utk melakukan kontrol terhadap routing browser
 
 ## Deployment  
-- Powered by Vercel
+- Powered by Vercel 
+
+## System Architecture BackEnd TravelGo  
+- NPM versi 9.6.7
+- Nodejs versi 18.17.1
+- ExpressJS versi 4.18.2
+- Nodemon versi 3.0.1
+
+## Tools 
+- brcypt versi 5.1.1 utk hash password pengguna
+- cors versi 2.8.5 utk mengizinkan permintaan source BackEnd ke FrontEnd
+- dotenv versi 16.3.1 utk mengelola Environment Variable
+- google-auth-library utk mengautentifikasi data login via google pengguna
+- jsonwebtoken versi 9.0.2 utk mengontrol autentifikasi pengguna via database menggunakan JWT
+- multer versi 1.4.5-lts.1 utk mengatasi inputan pengguna dalam bentuk file 
+
+## Database  
+Supabase.org versi 2.38.4 'https://supabase.com/'
+
+## API Documentation
+Route API - be-travel-go.vercel.app
+
+## Endpoint
+
+| No  | endpoint              | method      | fungsi                                                             | aktor          |
+|:--- | :---                  | :---        | :---                                                               | :---           |
+|1    | /api/auth/google      | POST        |'melayani proses login via Outh Google'                             | 'user & admin' |
+|2    | /api/auth/register    | POST        |'melayani proses register untuk pendaftaran akun'                   | 'user'         |
+|3    | /api/auth/login       | POST        |'melayani proses login untuk mengakses app      '                   | 'user & admin' |
+|4    | /api/data/wisata      | GET         |'mengambil semua data wisata'                                       | 'user & admin' |
+|5    | /api/add/wisata       | POST        |'menambahkan data wisata ke database'                               | 'admin'        |
+|6    | /api/update/wisata    | PUT         |'memperbarui data wisata di database'                               | 'admin'        |
+|7    | /api/delete/wisata    | DELETE      |'menghapus data wisata di database'                                 | 'admin'        |
+|8    | /api/upload/image     | POST        |'menambahkan data eksplorasi (Image) ke dalam Database'             | 'user & admin' |
+|7    | /api/data/eksplorasi  | POST        |'mengambil data eksplorasi dari database'                           | 'user & admin'        |
