@@ -47,7 +47,7 @@ Kontak merupakan halaman dimana pengguna dapat memberikan keluhan dan feedback k
 
 Tentang merupakan halaman dimana pengguna dapat melihat visi misi dan keunggulan dari TravelGo.
 
-- Jelajah wisata
+- Eksplorasi 
 
 Jelajah wisata merupakan tempat dimana pengguna dapat menggunggah foto pengalaman wisata mereka dan berinteraksi dengan pengguna lainnya.
 
