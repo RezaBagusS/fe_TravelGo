@@ -53,7 +53,7 @@ Jelajah wisata merupakan tempat dimana pengguna dapat menggunggah foto pengalama
 
 ## Rancangan Basis Data (DataWisata)
 
-Tabel Data Pasien
+
 | No  | Nama Kolom  | Tipe Data   | Contoh Data                     |
 |:--- | :---        | :---        | :---                            |
 |1    | created_at  | timestamptz |'2023-10-29'                     |
@@ -65,7 +65,7 @@ Tabel Data Pasien
 
 ## Rancangan Basis Data (ImageEksplorasi)
 
-Tabel Data Pasien
+
 | No  | Nama Kolom  | Tipe Data   | Contoh Data                     |
 |:--- | :---        | :---        | :---                            |
 |1    | submited_at | int8        |'2023-10-29'                     |
@@ -75,7 +75,7 @@ Tabel Data Pasien
 
 ## Rancangan Basis Data (allUser)
 
-Tabel Data Pasien
+
 | No  | Nama Kolom  | Tipe Data   | Contoh Data                     |
 |:--- | :---        | :---        | :---                            |
 |1    |registered_at| int8        |'2023-10-29'                     |
@@ -95,7 +95,7 @@ Tabel Data Pasien
 |Yarn                   | 1.22.19     |
 
 
-## Styling : ("2 kolom = tool, versi")
+## Styling 
 
 | Tools                 | Version     | 
 |:---                   | :---        | 
@@ -124,6 +124,7 @@ Tabel Data Pasien
 
 
 ## Deployment  
+
 - Powered by Vercel 
 
 ## System Architecture BackEnd TravelGo 
@@ -148,10 +149,12 @@ Tabel Data Pasien
 |6    | multer                  | 8.1.3             | mengatasi inputan pengguna dalam bentuk file                    |
  
 
-## Database  
+## Database 
+
 Supabase.org versi 2.38.4 'https://supabase.com/'
 
 ## API Documentation
+
 Route API - 'be-travel-go.vercel.app'
 
 ## Endpoint
